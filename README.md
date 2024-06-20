@@ -3,7 +3,7 @@
 | | |
 | --- | --- |
 | Org | [![United Nations DESA](https://img.shields.io/badge/United%20Nations%20DESA-blue)](https://www.un.org/en/desa) [![PSL cataloged](https://img.shields.io/badge/PSL-cataloged-a0a0a0.svg)](https://www.PSLmodels.org) [![OS License: CC0-1.0](https://img.shields.io/badge/OS%20License-CC0%201.0-yellow)](https://github.com/EAPD-DRB/OG-IDN/blob/main/LICENSE) |
-| Package | [![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/release/python-31013/) [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3116/) [![PyPI Latest Release](https://img.shields.io/pypi/v/ogzaf.svg)](https://pypi.org/project/ogzaf/) [![PyPI Downloads](https://img.shields.io/pypi/dm/ogzaf.svg?label=PyPI%20downloads)](https://pypi.org/project/ogzaf/) |
+| Package | [![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/release/python-31013/) [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3116/) [![PyPI Latest Release](https://img.shields.io/pypi/v/ogidn.svg)](https://pypi.org/project/ogidn/) [![PyPI Downloads](https://img.shields.io/pypi/dm/ogidn.svg?label=PyPI%20downloads)](https://pypi.org/project/ogidn/) |
 | Testing | ![example event parameter](https://github.com/EAPD-DRB/OG-IDN/actions/workflows/build_and_test.yml/badge.svg?branch=main) ![example event parameter](https://github.com/EAPD-DRB/OG-IDN/actions/workflows/deploy_docs.yml/badge.svg?branch=main) ![example event parameter](https://github.com/EAPD-DRB/OG-IDN/actions/workflows/check_format.yml/badge.svg?branch=main) [![Codecov](https://codecov.io/gh/EAPD-DRB/OG-IDN/branch/main/graph/badge.svg)](https://codecov.io/gh/EAPD-DRB/OG-IDN) |
 
 OG-IDN is an overlapping-generations (OG) model that allows for dynamic general equilibrium analysis of fiscal policy for Indonesia. OG-IDN is built on the OG-Core framework. The model output includes changes in macroeconomic aggregates (GDP, investment, consumption), wages, interest rates, and the stream of tax revenues over time. Regularly updated documentation of the model theory--its output, and solution method--and the Python API is available at https://pslmodels.github.io/OG-Core and documentation of the specific Indonesian calibration of the model will be available soon.
@@ -17,8 +17,8 @@ OG-IDN is an overlapping-generations (OG) model that allows for dynamic general 
   * Make sure the `conda` package manager is up-to-date: `conda update conda`.
   * Make sure the Anaconda distribution of Python is up-to-date: `conda update anaconda`.
 * Fork this repository and clone your fork of this repository to a directory on your computer.
-* From the terminal (or Anaconda command prompt), navigate to the directory to which you cloned this repository and run `conda env create -f environment.yml`. The process of creating the `ogzaf-dev` conda environment should not take more than five minutes.
-* Then, `conda activate ogzaf-dev`
+* From the terminal (or Anaconda command prompt), navigate to the directory to which you cloned this repository and run `conda env create -f environment.yml`. The process of creating the `ogidn-dev` conda environment should not take more than five minutes.
+* Then, `conda activate ogidn-dev`
 * Then install by `pip install -e .`
 ### Run an example of the model
 * Navigate to `./examples`
@@ -27,7 +27,7 @@ OG-IDN is an overlapping-generations (OG) model that allows for dynamic general 
 * Model outputs will be saved in the following files:
   * `./examples/OG-IDN_example_plots`
     * This folder will contain a number of plots generated from OG-Core to help you visualize the output from your run
-  * `./examples/ogzaf_example_output.csv`
+  * `./examples/ogidn_example_output.csv`
     * This is a summary of the percentage changes in macro variables over the first ten years and in the steady-state.
   * `./examples/OG-IDN-Example/OUTPUT_BASELINE/model_params.pkl`
     * Model parameters used in the baseline run
@@ -48,7 +48,7 @@ Once the package is installed, one can adjust parameters in the OG-Core `Specifi
 
 ```
 from ogcore.parameters import Specifications
-from ogzaf.calibrate import Calibration
+from ogidn.calibrate import Calibration
 p = Specifications()
 c = Calibration(p)
 updated_params = c.get_dict()
