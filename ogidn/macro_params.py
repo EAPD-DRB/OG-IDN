@@ -111,7 +111,6 @@ def get_macro_params():
 
     ilo_data = df_temp[["time", "obs_value"]]
 
-
     # initialize a dictionary of parameters
     macro_parameters = {}
 
