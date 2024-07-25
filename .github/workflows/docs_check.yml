@@ -3,10 +3,10 @@ on:
   pull_request:
     paths:
       - './docs/**.png'
-      - './docs/book/content/calibration/images/**.png'
       - './docs/README.md'
       - './docs/book/**.yml'
       - './docs/book/**.bib'
+      - './docs/book/content/calibration/images/**.png'
       - '**.md'
       - './docs/book/content/api/**.rst'
       - './ogidn/**.py'
