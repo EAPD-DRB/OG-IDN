@@ -92,7 +92,7 @@ The following text describes a typical workflow for changing
 situations, in which case other contributors are here to help.
 
 1. Before you edit the `OG-IDN` source code on your machine,
-   make sure you have the latest version of the central OG-USA
+   make sure you have the latest version of the central OG-IDN
    repository by executing the following **four** Git commands:
 
    a. Tell Git to switch to the master branch in your local repo.

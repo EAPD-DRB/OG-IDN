@@ -18,12 +18,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
@@ -37,9 +37,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
-  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
@@ -141,6 +141,8 @@
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="../intro/intro.html">
   
@@ -162,7 +164,7 @@
 
  <script>
  document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
     <span class="search-button__default-text">Search</span>
     <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
@@ -187,7 +189,6 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../api/public_api.html">API</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../api/calibrate.html">Main Calibration Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/demographics.html">Demographics Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/macro_params.html">Macro Parameter Estimation Functions</a></li>
 </ul>
 </details></li>
@@ -366,10 +367,10 @@
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
@@ -377,7 +378,7 @@ document.write(`
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
@@ -422,7 +423,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="demographics">
 <span id="chap-demog"></span><h1>Demographics<a class="headerlink" href="#demographics" title="Link to this heading">#</a></h1>
-<p>We start the <code class="docutils literal notranslate"><span class="pre">OG-IDN</span></code> section on modeling the household with a description of the demographics of the model. <span id="id1">[]</span> and <span id="id2">[]</span> have recently shown that demographic dynamics are likely the biggest influence on macroeconomic time series, exhibiting more influence than fiscal variables or household preference parameters.</p>
+<p>We start the <code class="docutils literal notranslate"><span class="pre">OG-IDN</span></code> section on modeling the household with a description of the demographics of the model. <span id="id1">[<a class="reference internal" href="../OGIDN_references.html#id58" title="Shinichi Nishiyama. Fiscal policy effects in a heterogeneous-agent olg economy with an aging population. Journal of Economic Dynamics and Control, 61:114-132, December 2015.">Nishiyama, 2015</a>]</span> and <span id="id2">[<a class="reference internal" href="../OGIDN_references.html#id25" title="Jason DeBacker, Richard W. Evans, and Kerk L. Phillips. Integrating microsimulation models of tax policy into a dge macroeconomic model. Public Finance Review, 47(2):207-275, March 2019.">DeBacker <em>et al.</em>, 2019</a>]</span> have recently shown that demographic dynamics are likely the biggest influence on macroeconomic time series, exhibiting more influence than fiscal variables or household preference parameters.</p>
 <p>In this chapter, we characterize the equations and parameters that govern the transition dynamics of the population distribution by age. In <code class="docutils literal notranslate"><span class="pre">OG-IDN</span></code>, we take the approach of taking mortality rates and fertility rates from outside estimates. But we estimate our immigration rates as residuals using the mortality rates, fertility rates, and at least two consecutive periods of population distribution data. This approach makes sense if one is modeling a country in which one is not confident in the immigration rate data. If the country has good immigration data, then the immigration residual approach we describe below can be skipped.</p>
 <p>We define <span class="math notranslate nohighlight">\(\omega_{s,t}\)</span> as the number of households of age <span class="math notranslate nohighlight">\(s\)</span> alive at time <span class="math notranslate nohighlight">\(t\)</span>. A measure <span class="math notranslate nohighlight">\(\omega_{1,t}\)</span> of households is born in each period <span class="math notranslate nohighlight">\(t\)</span> and live for up to <span class="math notranslate nohighlight">\(E+S\)</span> periods, with <span class="math notranslate nohighlight">\(S\geq 4\)</span>.<a class="footnote-reference brackets" href="#calibage-note" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> Households are termed ``youth’’, and do not participate in market activity during ages <span class="math notranslate nohighlight">\(1\leq s\leq E\)</span>. The households enter the workforce and economy in period <span class="math notranslate nohighlight">\(E+1\)</span> and remain in the workforce until they unexpectedly die or live until age <span class="math notranslate nohighlight">\(s=E+S\)</span>. We model the population with households age <span class="math notranslate nohighlight">\(s\leq E\)</span> outside of the workforce and economy in order most closely match the empirical population dynamics.</p>
 <p>The population of agents of each age in each period <span class="math notranslate nohighlight">\(\omega_{s,t}\)</span> evolves according to the following function,</p>
@@ -454,7 +455,7 @@ document.write(`
 <div class="math notranslate nohighlight" id="equation-eqpopimmrates">
 <span class="eqno">(6)<a class="headerlink" href="#equation-eqpopimmrates" title="Link to this equation">#</a></span>\[\begin{split}    i_1 &amp;= \frac{\omega_{1,t+1} - (1 - \rho_0)\sum_{s=1}^{E+S}f_s\omega_{s,t}}{\omega_{1,t}}\quad\forall t \\
     i_{s+1} &amp;= \frac{\omega_{s+1,t+1} - (1 - \rho_s)\omega_{s,t}}{\omega_{s+1,t}}\qquad\qquad\forall t\quad\text{and}\quad 1\leq s \leq E+S-1\end{split}\]</div>
-<p>We calculate our immigration rates for three different consecutive-year-periods of population distribution data (2010 through 2013). Our four years of population distribution by age data come from <span id="id5">[]</span>. The immigration rates <span class="math notranslate nohighlight">\(i_s\)</span> that we use in our model are the the residuals described in <a class="reference internal" href="#equation-eqpopimmrates">(6)</a> averaged across the three periods. <code class="xref std std-numref docutils literal notranslate"><span class="pre">Figure</span> <span class="pre">%s</span></code> shows the estimated immigration rates for <span class="math notranslate nohighlight">\(E+S=100\)</span> and given the fertility rates from Section <a class="reference internal" href="#secdemogfert"><span class="std std-ref">Fertility rates</span></a> and the mortality rates from Section <a class="reference internal" href="#secdemogmort"><span class="std std-ref">Mortality rates</span></a>.</p>
+<p>We calculate our immigration rates for three different consecutive-year-periods of population distribution data (2010 through 2013). Our four years of population distribution by age data come from <span id="id5">[<a class="reference internal" href="../OGIDN_references.html#id18" title="Census Bureau. Annual estimates of the resident population by single year of age and sex: april 1, 2010 to july 1, 2013 (both sexes). National Characteristics Vintage 2013, U.S. Census Bureau, http://www.census.gov/popest/data/national/asrh/2013/index.html, 2015.">Census Bureau, 2015</a>]</span>. The immigration rates <span class="math notranslate nohighlight">\(i_s\)</span> that we use in our model are the the residuals described in <a class="reference internal" href="#equation-eqpopimmrates">(6)</a> averaged across the three periods. <code class="xref std std-numref docutils literal notranslate"><span class="pre">Figure</span> <span class="pre">%s</span></code> shows the estimated immigration rates for <span class="math notranslate nohighlight">\(E+S=100\)</span> and given the fertility rates from Section <a class="reference internal" href="#secdemogfert"><span class="std std-ref">Fertility rates</span></a> and the mortality rates from Section <a class="reference internal" href="#secdemogmort"><span class="std std-ref">Mortality rates</span></a>.</p>
 <p>At the end of Section <a class="reference internal" href="#secdemogpopsstp"><span class="std std-ref">Population steady-state and transition path</span></a>, we describe a small adjustment that we make to the immigration rates after a certain number of periods in order to make computation of the transition path equilibrium of the model compute more robustly.</p>
 </section>
 <section id="population-steady-state-and-transition-path">
@@ -538,7 +539,7 @@ First, note that the matrix <span class="math notranslate nohighlight">\(\boldsy
 <p>Existence of an <span class="math notranslate nohighlight">\(m \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(\left(\bf\Omega^m\right)_{ij} \neq 0 ~~ ( &gt; 0)\)</span> is one of the definitions of an irreducible (primitive) matrix. It is equivalent to saying that the directed graph associated with the matrix is strongly connected. Now the Perron-Frobenius Theorem for irreducible matrices gives us that the equilibrium vector is unique.</p>
 <p>We also know from that theorem that the eigenvalue associated with the positive real eigenvector will be real and positive. This eigenvalue, <span class="math notranslate nohighlight">\(p\)</span>, is the Perron eigenvalue and it is the steady state population growth rate of the model. By the PF Theorem for irreducible matrices, <span class="math notranslate nohighlight">\(| \lambda_i | \leq p\)</span> for all eigenvalues <span class="math notranslate nohighlight">\(\lambda_i\)</span> and there will be exactly <span class="math notranslate nohighlight">\(h\)</span> eigenvalues that are equal, where <span class="math notranslate nohighlight">\(h\)</span> is the period of the matrix. Since our matrix <span class="math notranslate nohighlight">\(\bf\Omega\)</span> is aperiodic, the steady state growth rate is the unique largest eigenvalue in magnitude. This implies that almost all initial vectors will converge to this eigenvector under iteration.</p>
 </div>
-<p>For a full treatment and proof of the Perron-Frobenius Theorem, see <span id="id6">[]</span>. Because the population growth process is exogenous to the model, we calibrate it to annual age data for age years <span class="math notranslate nohighlight">\(s=1\)</span> to <span class="math notranslate nohighlight">\(s=100\)</span>.</p>
+<p>For a full treatment and proof of the Perron-Frobenius Theorem, see <span id="id6">[<a class="reference internal" href="../OGIDN_references.html#id67" title="Kotaro Suzumura. Perron-frobenius theorem on non-negative square matrices: an elementary proof. Hitotsubashi Journal of Economics, 24:137-141, 1983.">Suzumura, 1983</a>]</span>. Because the population growth process is exogenous to the model, we calibrate it to annual age data for age years <span class="math notranslate nohighlight">\(s=1\)</span> to <span class="math notranslate nohighlight">\(s=100\)</span>.</p>
 <p><a class="reference internal" href="#figorigvsfixsspop"><span class="std std-numref">Figure 1</span></a> shows the steady-state population distribution <span class="math notranslate nohighlight">\(\boldsymbol{\bar{\omega}}\)</span> and the population distribution after 120 periods <span class="math notranslate nohighlight">\(\boldsymbol{\hat{\omega}}_{120}\)</span>. Although the two distributions look very close to each other, they are not exactly the same.</p>
 <figure class="align-default" id="figorigvsfixsspop">
 <a class="reference internal image-reference" href="../../_images/OrigVsFixSSpop.png"><img alt="../../_images/OrigVsFixSSpop.png" src="../../_images/OrigVsFixSSpop.png" style="height: 500px;" /></a>
@@ -553,7 +554,7 @@ First, note that the matrix <span class="math notranslate nohighlight">\(\boldsy
 <p><span class="caption-number">Fig. 2 </span><span class="caption-text">Original immigration rates vs. adjusted immigration rates to make fixed steady-state population distribution</span><a class="headerlink" href="#figimmratechg" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The most recent year of population data come from <span id="id7">[]</span> population estimates for both sexes for 2013. We those data and use the population transition matrix <a class="reference internal" href="#equation-eqpoplomstatmat2">(9)</a> to age it to the current model year of 2015. We then use <a class="reference internal" href="#equation-eqpoplomstatmat2">(9)</a> to generate the transition path of the population distribution over the time period of the model. <a class="reference internal" href="#figpopdistpath"><span class="std std-numref">Figure 3</span></a> shows the progression from the 2013 population data to the fixed steady-state at period <span class="math notranslate nohighlight">\(t=120\)</span>. The time path of the growth rate of the economically active population <span class="math notranslate nohighlight">\(\tilde{g}_{n,t}\)</span> is shown in <a class="reference internal" href="#figpopdistpath"><span class="std std-numref">Figure 3</span></a>.</p>
+<p>The most recent year of population data come from <span id="id7">[<a class="reference internal" href="../OGIDN_references.html#id18" title="Census Bureau. Annual estimates of the resident population by single year of age and sex: april 1, 2010 to july 1, 2013 (both sexes). National Characteristics Vintage 2013, U.S. Census Bureau, http://www.census.gov/popest/data/national/asrh/2013/index.html, 2015.">Census Bureau, 2015</a>]</span> population estimates for both sexes for 2013. We those data and use the population transition matrix <a class="reference internal" href="#equation-eqpoplomstatmat2">(9)</a> to age it to the current model year of 2015. We then use <a class="reference internal" href="#equation-eqpoplomstatmat2">(9)</a> to generate the transition path of the population distribution over the time period of the model. <a class="reference internal" href="#figpopdistpath"><span class="std std-numref">Figure 3</span></a> shows the progression from the 2013 population data to the fixed steady-state at period <span class="math notranslate nohighlight">\(t=120\)</span>. The time path of the growth rate of the economically active population <span class="math notranslate nohighlight">\(\tilde{g}_{n,t}\)</span> is shown in <a class="reference internal" href="#figpopdistpath"><span class="std std-numref">Figure 3</span></a>.</p>
 <figure class="align-default" id="figpopdistpath">
 <a class="reference internal image-reference" href="../../_images/PopDistPath.png"><img alt="../../_images/PopDistPath.png" src="../../_images/PopDistPath.png" style="height: 500px;" /></a>
 <figcaption>
@@ -589,16 +590,16 @@ First, note that the matrix <span class="math notranslate nohighlight">\(\boldsy
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "ogidn-dev"
+            mode: "python"
         },
         kernelOptions: {
-            name: "ogidn-dev",
+            name: "python3",
             path: "./content/calibration"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'ogidn-dev'</script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -662,7 +663,7 @@ First, note that the matrix <span class="math notranslate nohighlight">\(\boldsy
   <div class="footer-item">
     
 <p class="component-author">
-By Marcelo LaFleur and Richard W. Evans
+By Marcelo LaFleur, Richard W. Evans, and Jason DeBacker
 </p>
 
   </div>
@@ -672,7 +673,7 @@ By Marcelo LaFleur and Richard W. Evans
 
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2024.
       <br/>
     
   </p>
@@ -696,8 +697,8 @@ By Marcelo LaFleur and Richard W. Evans
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -1,29 +1,16 @@
----
-jupytext:
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: '0.8'
-    jupytext_version: '1.4.1'
-kernelspec:
-  display_name: Python 3
-  language: python
-  name: ogidn-dev
----
-
 (Chap_Exog)=
 # Exogenous Parameters
 
   [TODO: This chapter needs heavy updating. Would be nice to do something similar to API chapter. But it is also nice to have references and descriptions as in the table below.]
 
-  In this chapter, list the exogenous inputs to the model, options, and where the values come from (weak calibration vs. strong calibration). Point to the respective chapters for some of the inputs. Mention the code in [`default_parameters.json`](https://github.com/PSLmodels/OG-USA/blob/master/ogusa/default_parameters.json) and [`parameters.py`](https://github.com/PSLmodels/OG-USA/blob/master/ogusa/parameters.py).
+  In this chapter, list the exogenous inputs to the model, options, and where the values come from (weak calibration vs. strong calibration). Point to the respective chapters for some of the inputs. Mention the code in [`ogidn_default_parameters.json`](https://github.com/EAPD-DRB/OG-IDN/blob/master/ogidn/ogidn_default_parameters.json) in this repository, and in [`default_parameters.json`](https://github.com/PSLmodels/OG-Core/blob/master/ogcore/default_parameters.json) and [`parameters.py`](https://github.com/PSLmodels/OG-Core/blob/master/ogcore/parameters.py) in the OG-Core repository.
 
   <!-- +++
   ```{code-cell} ogidn-dev
   :tags: [hide-cell]
   from myst_nb import glue
-  import ogidn.parameter_tables as pt
-  from ogidn import Specifications
+  import ogcore.parameter_tables as pt
+  from ogcore import Specifications
   p = Specifications()
   table = pt.param_table(p, table_format=None, path=None)
   glue("param_table", table, display=False)

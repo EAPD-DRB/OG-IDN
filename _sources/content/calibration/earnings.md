@@ -1,16 +1,3 @@
----
-jupytext:
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: '0.8'
-    jupytext_version: '1.4.1'
-kernelspec:
-  display_name: Python 3
-  language: python
-  name: ogidn-dev
----
-
 (Chap_LfEarn)=
 # Lifetime Earnings Profiles
 
@@ -25,7 +12,7 @@ Differences among workers' productivity in terms of ability is one of the key di
 
 In this specification, $w_t$ is an equilibrium wage representing a portion of labor income that is common to all workers. Individual quantity of labor supply is $n_{j,s,t}$, and $e_{j,s}$ represents a labor productivity factor that augments or diminishes the productivity of a worker's labor supply relative to average productivity.
 
-We calibrate deterministic ability paths such that each lifetime income group has a different life-cycle profile of earnings. The distribution of income and wealth are often focal components of macroeconomic models. These calibrations require the use of microeconomic data on household incomes, but this level of data is not readily available for Indonesia from public sources or surveys. To overcome this, we start with the proposition that estimated productivity curves calibrated for the [OG-USA](https://pslmodels.github.io/OG-USA/content/calibration/earnings.html) model, generated from micro-level earnings data, represent a generalized relationship between age and lifetime income {cite}`DeBackerEtAl:2017`. As such, our objective is to generate the curves for the U.S. and then adjust their generalized shapes to produce those for Indonesia. In other words, our strategic approach is to apply Indonesia's national distribution of income by age to the estimated U.S. data on income by age, and then use these re-distributed data to re-estimate the earning profile curves and use them for Indonesia. This is done in two ways (in this order):
+We calibrate deterministic ability paths such that each lifetime income group has a different life-cycle profile of earnings. The distribution of income and wealth are often focal components of macroeconomic models. These calibrations require the use of microeconomic data on household incomes, but this level of data is not readily available for Indonesia from public sources or surveys. To overcome this, we start with the proposition that estimated productivity curves calibrated for the [OG-IDN](https://eapd-drb.github.io/OG-IDN/content/calibration/earnings.html) model, generated from micro-level earnings data, represent a generalized relationship between age and lifetime income {cite}`DeBackerEtAl:2017`. As such, our objective is to generate the curves for the U.S. and then adjust their generalized shapes to produce those for Indonesia. In other words, our strategic approach is to apply Indonesia's national distribution of income by age to the estimated U.S. data on income by age, and then use these re-distributed data to re-estimate the earning profile curves and use them for Indonesia. This is done in two ways (in this order):
   1. Adjustment by income ($J$): adjust the gaps between the U.S. curves to match Indonesia's distribution between the $J$-income groups, using data from the World Inequality Database (WID);
   2. Adjustment by age ($S$): adjust the shape of all the U.S. curves to match Indonesia's national distribution of income per capita for each age year, using data from the National Transfer Accounts database (NTA).
 
@@ -43,8 +30,8 @@ Exogenous life cycle income ability paths $\log(e_{j,s})$ with $S=80$ and $J=7$
 ```{code-cell} ogidn-dev
 :tags: [hide-cell]
 from myst_nb import glue
-import ogidn.parameter_plots as pp
-from ogidn import Specifications
+import ogcore.parameter_plots as pp
+from ogcore.parameters import Specifications
 p = Specifications()
 fig = pp.plot_ability_profiles(p)
 glue("earnings_profiles", fig, display=False)
