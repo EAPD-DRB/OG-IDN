@@ -1,16 +1,3 @@
----
-jupytext:
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: '0.8'
-    jupytext_version: '1.4.1'
-kernelspec:
-  display_name: Python 3
-  language: python
-  name: ogidn-dev
----
-
 (Chap_LfEarn)=
 # Lifetime Earnings Profiles
 
@@ -43,8 +30,8 @@ Exogenous life cycle income ability paths $\log(e_{j,s})$ with $S=80$ and $J=7$
 ```{code-cell} ogidn-dev
 :tags: [hide-cell]
 from myst_nb import glue
-import ogidn.parameter_plots as pp
-from ogidn import Specifications
+import ogcore.parameter_plots as pp
+from ogcore.parameters import Specifications
 p = Specifications()
 fig = pp.plot_ability_profiles(p)
 glue("earnings_profiles", fig, display=False)
