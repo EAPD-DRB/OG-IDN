@@ -8,7 +8,7 @@ setuptools.setup(
     version="0.0.2",
     author="Marcelo LaFleur, Richard W. Evans, and Jason DeBacker",
     license="CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
-    description="Indonesia Calibration for OG-Core",
+    description="Indonesia (IDN) Calibration for OG-Core",
     long_description_content_type="text/markdown",
     long_description=longdesc,
     keywords="IDN Indonesia calibration of large scale overlapping generations model of fiscal policy",
@@ -18,7 +18,12 @@ setuptools.setup(
         "Issue Tracker": "https://github.com/EAPD-DRB/OG-IDN/issues",
     },
     packages=["ogidn"],
-    package_data={"ogidn": ["ogidn_default_parameters.json", "data/*"]},
+    package_data={
+        "ogidn": [
+            "ogidn_default_parameters.json",
+            "data/*"
+        ]
+    },
     include_packages=True,
     python_requires=">=3.7.7, <3.12",
     install_requires=[
