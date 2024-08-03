@@ -1,5 +1,5 @@
 """
-This script creates tables and figures from the OG-ZAF documentation.
+This script creates tables and figures from the OG-IDN documentation.
 """
 
 # import
@@ -27,7 +27,7 @@ Load specifications object with default parameters
 """
 p = Specifications()
 p.update_specifications(
-    "github://EAPD-DRB:OG-ZAF@main/ogzaf/ogzaf_default_parameters.json"
+    "github://EAPD-DRB:OG-IDN@main/ogidn/ogidn_default_parameters.json"
 )
 p.start_year = YEAR_TO_PLOT
 
