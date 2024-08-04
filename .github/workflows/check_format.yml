@@ -8,6 +8,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v4
+        with:
+          activate-environment: ogidn-dev
+          environment-file: environment.yml
+          python-version: "3.11"
       - uses: psf/black@stable
         with:
           options: "-l 79 --check"
