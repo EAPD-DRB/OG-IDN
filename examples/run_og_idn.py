@@ -8,12 +8,13 @@ import time
 import copy
 import importlib.resources
 import matplotlib.pyplot as plt
-from ogidn.calibrate import Calibration
+import ogcore
 from ogcore.parameters import Specifications
 from ogcore import output_tables as ot
 from ogcore import output_plots as op
 from ogcore.execute import runner
 from ogcore.utils import safe_read_pickle
+from ogidn.calibrate import Calibration
 from ogidn.utils import is_connected
 
 # Use a custom matplotlib style file for plots
