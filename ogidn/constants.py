@@ -366,11 +366,11 @@ PROD_DICT = {
         "afore",
         "afish",
     ],
-    "Minig": [
+    "Mining": [
         "amine",
     ],
     "Utilities": ["aelec", "awatr"],
-    "Contruction": ["acons"],
+    "Construction": ["acons"],
     "Trade and Transport": [
         "atrad",
         "atran",
