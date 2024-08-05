@@ -5,6 +5,8 @@ import numpy as np
 import datetime
 from ogcore import demographics
 
+UN_COUNTRY_CODE = "360"
+
 
 class Calibration:
     """OG-IDN calibration class"""
@@ -62,7 +64,7 @@ class Calibration:
             p.T,
             0,
             99,
-            country_id="710",
+            country_id=UN_COUNTRY_CODE,
             initial_data_year=p.start_year - 1,
             final_data_year=p.start_year + 1,
             GraphDiag=False,
@@ -76,7 +78,7 @@ class Calibration:
             p.T,
             0,
             99,
-            country_id="710",
+            country_id=UN_COUNTRY_CODE,
             initial_data_year=p.start_year - 1,
             final_data_year=p.start_year + 1,
             GraphDiag=False,
