@@ -12,7 +12,9 @@ CUR_PATH = os.path.abspath(os.path.dirname(__file__))
 OUTPUT_DIR = os.path.join(CUR_PATH, "OUTPUT", "ability")
 
 
-def get_e_interp(E, S, J, lambdas, age_wgts, gini_to_match=38.3, plot=False):
+def get_e_interp(
+    E, S, J, lambdas, age_wgts, gini_to_match=38.3, plot_path=None
+):
     """
     This function takes the calibrated lifetime earnings profiles
     (abilities, e matrix) from OG-USA and then adjusts the shape of those
@@ -185,7 +187,7 @@ def get_e_interp(E, S, J, lambdas, age_wgts, gini_to_match=38.3, plot=False):
             / (emat_new * age_wgts.reshape(S, 1) * lambdas.reshape(1, J)).sum()
         )
 
-        if plot:
+        if plot_path is not None:
             kwargs = {"filesuffix": "_intrp_scaled"}
             pp.plot_income_data(
                 new_s_midp,
