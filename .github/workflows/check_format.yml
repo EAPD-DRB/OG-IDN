@@ -12,3 +12,4 @@ jobs:
         with:
           options: "-l 79 --check"
           src: "."
+          use_pyproject: True
