@@ -146,7 +146,7 @@ Income chapter
 """
 # IDN profiles
 pp.plot_ability_profiles(
-    p, p2=None, t=None, log_scale=False, include_title=False, path=plot_path
+    p, p2=None, t=None, log_scale=True, include_title=False, path=plot_path
 )
 # Plotting with USA also is too busy, so do separately
 pp.plot_ability_profiles(
