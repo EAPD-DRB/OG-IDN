@@ -41,6 +41,6 @@ envs/
 *.coverage*
 *coverage.xml*
 docs/book/_build/*
-*/OG-ZAF_example_plots/*
-*ogzaf_example_output.csv
-*/OG-ZAF-Example/*
+*/OG-IDN_example_plots/*
+*ogidn_example_output.csv
+*/OG-IDN-Example/*
