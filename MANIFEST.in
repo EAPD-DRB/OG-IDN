@@ -1,1 +1,2 @@
 include ogidn/ogidn_default_parameters.json
+include ogidn/data/002_IFPRI_SAM_IDN_2018_SAM.csv
