@@ -13,7 +13,7 @@ from ogcore.parameters import Specifications
 from ogcore import output_tables as ot
 from ogcore import output_plots as op
 from ogcore.execute import runner
-from ogcore.utils import safe_read_pickle
+from ogcore.utils import safe_read_pickle, param_dump_json
 from ogidn.calibrate import Calibration
 from ogidn.utils import is_connected
 
