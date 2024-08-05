@@ -37,7 +37,7 @@ setuptools.setup(
         "statsmodels",
         "linearmodels",
         "wheel",
-        "black>=24.1.1,<24.3",
+        "black",
         "linecheck",
         "ogcore",
     ],
