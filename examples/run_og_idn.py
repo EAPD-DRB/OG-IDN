@@ -18,7 +18,7 @@ from ogidn.calibrate import Calibration
 from ogidn.utils import is_connected
 
 # Use a custom matplotlib style file for plots
-plt.style.use("ogcore.OGcorePlots")
+# plt.style.use("ogcore.OGcorePlots")
 
 
 def main():
