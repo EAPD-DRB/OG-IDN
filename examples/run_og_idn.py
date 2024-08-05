@@ -57,9 +57,6 @@ def main():
         updated_params = c.get_dict()
         p.update_specifications(updated_params)
 
-    # Save updated parameters to json file
-    param_dump_json(p, os.path.join(base_dir, "idn_model_params.json"))
-
     # Run model
     start_time = time.time()
     runner(p, time_path=True, client=client)

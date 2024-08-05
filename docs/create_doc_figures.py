@@ -27,9 +27,7 @@ Load specifications object with default parameters
 """
 p = Specifications()
 p.update_specifications(
-    # "github://EAPD-DRB:OG-IDN@main/ogidn/ogidn_default_parameters.json"
-    # "/Users/jason.debacker/repos/OG-IDN/ogidn/ogidn_default_parameters.json"
-     "/Users/jason.debacker/repos/OG-IDN/idn_model_params.json"
+    "github://EAPD-DRB:OG-IDN@main/ogidn/ogidn_default_parameters.json"
 )
 p.start_year = YEAR_TO_PLOT
 
