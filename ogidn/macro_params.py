@@ -146,7 +146,8 @@ def get_macro_params(
         - (
             (
                 ilo_data.loc[
-                    ilo_data["time"] == min(data_end_date.year, 2021), "obs_value"  # 2021 is latest year of data
+                    ilo_data["time"] == min(data_end_date.year, 2021),
+                    "obs_value",  # 2021 is latest year of data
                 ].squeeze()
             )
             / 100

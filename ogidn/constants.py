@@ -318,11 +318,7 @@ CONS_DICT = {
         "cfood",
         "cbeve",
     ],
-    "Energy and water": [
-        "cmine",
-        "celec",
-        "cwatr"
-    ],
+    "Energy and water": ["cmine", "celec", "cwatr"],
     "Non-durables": [
         "ctext",
         "cwood",
@@ -368,18 +364,13 @@ PROD_DICT = {
         "apoul",
         "aoliv",
         "afore",
-        "afish"
+        "afish",
     ],
     "Minig": [
         "amine",
     ],
-    "Utilities": [
-        "aelec",
-        "awatr"
-    ],
-    "Contruction": [
-        "acons"
-    ],
+    "Utilities": ["aelec", "awatr"],
+    "Contruction": ["acons"],
     "Trade and Transport": [
         "atrad",
         "atran",
@@ -404,6 +395,6 @@ PROD_DICT = {
         "anmet",
         "ametl",
         "amach",
-        "aoman"
-    ]
+        "aoman",
+    ],
 }

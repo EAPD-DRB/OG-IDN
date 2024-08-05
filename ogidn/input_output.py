@@ -32,14 +32,23 @@ def get_alpha_c(sam=SAM, cons_dict=CONS_DICT):
         alpha_c (dict): Dictionary of shares of household expenditures
     """
 
-    hh_cols = ["hhd-r1", "hhd-r2", "hhd-r3", "hhd-r4", "hhd-r5", "hhd-u1", "hhd-u2", "hhd-u3", "hhd-u4", "hhd-u5"]
+    hh_cols = [
+        "hhd-r1",
+        "hhd-r2",
+        "hhd-r3",
+        "hhd-r4",
+        "hhd-r5",
+        "hhd-u1",
+        "hhd-u2",
+        "hhd-u3",
+        "hhd-u4",
+        "hhd-u5",
+    ]
     alpha_c = {}
     overall_sum = 0
     for key, value in cons_dict.items():
         # note the subtraction of the row to focus on domestic consumption
-        category_total = (
-            sam.loc[sam.index.isin(value), hh_cols].values.sum()
-        )
+        category_total = sam.loc[sam.index.isin(value), hh_cols].values.sum()
         alpha_c[key] = category_total
         overall_sum += category_total
     for key, value in cons_dict.items():
