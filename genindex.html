@@ -186,20 +186,24 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="content/api/public_api.html">API</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="content/api/calibrate.html">Main Calibration Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/api/income.html">Life-cycle productivity profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/api/input_output.html">Output-Consumption Bridge</a></li>
 <li class="toctree-l2"><a class="reference internal" href="content/api/macro_params.html">Macro Parameter Estimation Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/api/utils.html">Calibration Utilities</a></li>
 </ul>
 </details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Calibration</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="content/calibration/exogenous_parameters.html">Exogenous Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/calibration/households.html">Calibration of Household Preference Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/calibration/firms.html">Calibration of Firms Parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="content/calibration/macro.html">Calibration of Macroeconomic Parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="content/calibration/demographics.html">Demographics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="content/calibration/earnings.html">Lifetime Earnings Profiles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="content/calibration/tax_functions.html">Tax Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="content/calibration/bequests.html">Bequest Process Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/calibration/taxes.html">Taxes in OG-IDN</a></li>
 <li class="toctree-l1"><a class="reference internal" href="content/calibration/UBI.html">Universal Basic Income (UBI)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="content/calibration/matching_lwi.html">Matching Labor, Wealth, and Income Moments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/calibration/exogenous_parameters.html">Exogenous Parameters</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul class="nav bd-sidenav">
@@ -363,6 +367,7 @@ document.write(`
 <div class="genindex-jumpbox">
  <a href="#C"><strong>C</strong></a>
  | <a href="#G"><strong>G</strong></a>
+ | <a href="#I"><strong>I</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#O"><strong>O</strong></a>
  
@@ -373,12 +378,32 @@ document.write(`
       <li><a href="content/api/calibrate.html#ogidn.calibrate.Calibration">Calibration (class in ogidn.calibrate)</a>
 </li>
   </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="content/api/utils.html#ogidn.utils.CustomHttpAdapter">CustomHttpAdapter (class in ogidn.utils)</a>
+</li>
+  </ul></td>
 </tr></table>
 
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="content/api/input_output.html#ogidn.input_output.get_alpha_c">get_alpha_c() (in module ogidn.input_output)</a>
+</li>
+      <li><a href="content/api/income.html#ogidn.income.get_e_interp">get_e_interp() (in module ogidn.income)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="content/api/input_output.html#ogidn.input_output.get_io_matrix">get_io_matrix() (in module ogidn.input_output)</a>
+</li>
       <li><a href="content/api/macro_params.html#ogidn.macro_params.get_macro_params">get_macro_params() (in module ogidn.macro_params)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="content/api/utils.html#ogidn.utils.CustomHttpAdapter.init_poolmanager">init_poolmanager() (ogidn.utils.CustomHttpAdapter method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -390,7 +415,13 @@ document.write(`
     module
 
       <ul>
+        <li><a href="content/api/income.html#module-ogidn.income">ogidn.income</a>
+</li>
+        <li><a href="content/api/input_output.html#module-ogidn.input_output">ogidn.input_output</a>
+</li>
         <li><a href="content/api/macro_params.html#module-ogidn.macro_params">ogidn.macro_params</a>
+</li>
+        <li><a href="content/api/utils.html#module-ogidn.utils">ogidn.utils</a>
 </li>
       </ul></li>
   </ul></td>
@@ -400,10 +431,33 @@ document.write(`
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li>
+    ogidn.income
+
+      <ul>
+        <li><a href="content/api/income.html#module-ogidn.income">module</a>
+</li>
+      </ul></li>
+      <li>
+    ogidn.input_output
+
+      <ul>
+        <li><a href="content/api/input_output.html#module-ogidn.input_output">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
     ogidn.macro_params
 
       <ul>
         <li><a href="content/api/macro_params.html#module-ogidn.macro_params">module</a>
+</li>
+      </ul></li>
+      <li>
+    ogidn.utils
+
+      <ul>
+        <li><a href="content/api/utils.html#module-ogidn.utils">module</a>
 </li>
       </ul></li>
   </ul></td>
