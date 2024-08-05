@@ -3,7 +3,7 @@
 
 ## Economic Assumptions
 
-As the default rate of labor augmenting technological change, $g_y$, we use a value of 0%.  The average annual growth rate in GDP per capita in South Africa between 2007 and 2023 is 0.0% per year.
+As the default rate of labor augmenting technological change, $g_y$, we use a value of ?%.  The average annual growth rate in GDP per capita in Indonesia between 2007 and 2023 is ?.?% per year.
 
 ## Open Economy Parameters
 

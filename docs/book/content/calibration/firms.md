@@ -7,7 +7,7 @@ The [OG-Core firm theory documentation](https://pslmodels.github.io/OG-Core/cont
 
 ### Elasticity of substitution
 
-`OG-ZAF`'s default parameterization has an elasticity of substitution of $\varepsilon=1.0$, which implies a Cobb-Douglas production function.
+`OG-IDN`'s default parameterization has an elasticity of substitution of $\varepsilon=1.0$, which implies a Cobb-Douglas production function.
 
 ### Capital's share of output
 

@@ -8,21 +8,21 @@ jupytext:
 kernelspec:
   display_name: Python 3
   language: python
-  name: ogzaf-dev
+  name: ogidn-dev
 ---
 
 (Chap_Exog)=
 # Exogenous Parameters
 
 
-  The JSON file [`ogzaf_default_parameters.json`](https://github.com/EAPD-DRB/OG-ZAF/blob/master/ogzaf/ogzaf_default_parameters.json) provides values for all the model parameters used as defaults for `OG-ZAF`. Below, we provide a table highlighting some of the parameters describing the scale of the model (number of periods, aged, productivity types) and some parameters of the solution method (dampening parameter for TPI). The table below provides a list of the exogenous parameters and their baseline calibration values.
+  The JSON file [`ogidn_default_parameters.json`](https://github.com/EAPD-DRB/OG-IDN/blob/master/ogidn/ogidn_default_parameters.json) provides values for all the model parameters used as defaults for `OG-IDN`. Below, we provide a table highlighting some of the parameters describing the scale of the model (number of periods, aged, productivity types) and some parameters of the solution method (dampening parameter for TPI). The table below provides a list of the exogenous parameters and their baseline calibration values.
 
   <!-- +++
-  ```{code-cell} ogzaf-dev
+  ```{code-cell} ogidn-dev
   :tags: [hide-cell]
   from myst_nb import glue
-  import ogzaf.parameter_tables as pt
-  from ogzaf import Specifications
+  import ogcore.parameter_tables as pt
+  from ogcore import Specifications
   p = Specifications()
   table = pt.param_table(p, table_format=None, path=None)
   glue("param_table", table, display=False)
