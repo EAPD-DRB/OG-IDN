@@ -12,4 +12,7 @@ There is also a link to the source code for each documented member.
    :maxdepth: 1
 
    calibrate
+   income
+   input_output
    macro_params
+   utils
