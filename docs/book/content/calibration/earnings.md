@@ -27,10 +27,14 @@ In this specification, $w_t$ is an equilibrium wage representing a portion of la
 
 We calibrate the model such that each lifetime income group has a different life-cycle profile of earnings. Since the distribution on income and wealth are key aspects of our model, we calibrate these processes so that we can represent earners in the top 1 percent of the distribution of lifetime income.
 
-We calibrate deterministic productivity paths such that each lifetime income group has a different life-cycle profile of earnings. The distribution of income and wealth are often focal components of macroeconomic models. These calibrations require the use of microeconomic data on household incomes, but this level of data is not readily available for Indonesia from public sources or surveys. To overcome this, we start with the proposition that estimated productivity curves calibrated for the [OG-USA](https://pslmodels.github.io/OG-USA/content/calibration/earnings.html) model, generated from micro-level earnings data, represent a generalized relationship between age and lifetime income {cite}`DeBackerEtAl:2017`. As such, our objective is to generate the curves for the U.S. and then adjust their generalized shapes to produce those for Indonesia. In other words, our strategic approach is to begin with the lifecycle labor productivity profiles estimated from detailed U.S. data and then adjust these to match the distribution of income in Indonesia. This is done in two ways (in this order):
+We calibrate deterministic productivity paths such that each lifetime income group has a different life-cycle profile of earnings. The distribution of income and wealth are often focal components of macroeconomic models. These calibrations require the use of microeconomic data on household incomes, but this level of data is not readily available for Indonesia from public sources or surveys. To overcome this, we start with the proposition that estimated productivity curves calibrated for the [OG-USA](https://pslmodels.github.io/OG-USA/content/calibration/earnings.html) model, generated from micro-level earnings data, represent a generalized relationship between age and lifetime income {cite}`DeBackerEtAl:2017`. As such, our objective is to generate the curves for the U.S. and then adjust their generalized shapes to produce those for Indonesia. In other words, our strategic approach is to begin with the lifecycle labor productivity profiles estimated from detailed U.S. data and then adjust these to match the distribution of income in Indonesia, as measured with the Gini coefficient. This is done in by finding the value of $a$, such that:
 
-  1. Adjustment by income ($J$): adjust the gaps between the U.S. curves to match Indonesia's distribution between the $J$-income groups, using data from the World Inequality Database (WID);
-  2. Adjustment by age ($S$): adjust the shape of all the U.S. curves to match Indonesia's national distribution of income per capita for each age year, using data from the National Transfer Accounts database (NTA).
+```{math}
+  :label: eqnEarningsCalib
+    e^{IDN} = e^{USA} * exp^{(a * e^{USA})}
+```
+
+and where, $e^{IDN}$, when applied to the population distribution of Indonesia, returns a Gini coefficient that matches the observed Gini coefficient for Indonesia, 38.3.
 
 ```{figure} ./images/ability_profiles.png
 ---
