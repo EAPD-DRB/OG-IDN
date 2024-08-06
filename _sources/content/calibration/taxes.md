@@ -14,12 +14,12 @@ The government sector influences households through two terms in the household b
   &\quad\forall j,t\quad\text{and}\quad s\geq E+1 \quad\text{where}\quad b_{j,E+1,t}=0\quad\forall j,t
 ```
 
-The total tax function, $T_{s,t}$, is a function of personal income taxes, taxes on bequests, and wealth taxes.  In the default calibration, wealth and bequest taxes are set to zero in `OG-IDN`. Personal income taxes are modeled as linear taxes and set to average effective and marginal tax rates.  The [OG-Core documentation](https://pslmodels.github.io/OG-Core/content/theory/government.html#taxes) details more detailed ways to match the progressivity of the tax system.  But given limited data for Indonesia, we start with simple linear tax rates of 22% for effective tax rates on personal income, a 25% marginal tax rate on capital income, and a 31\% marginal tax rate on labor income.
+The total tax function, $T_{s,t}$, is a function of personal income taxes, taxes on bequests, and wealth taxes.  In the default calibration, wealth and bequest taxes are set to zero in `OG-IDN`. Personal income taxes are modeled as linear taxes and set to average effective and marginal tax rates.  The [OG-Core documentation](https://pslmodels.github.io/OG-Core/content/theory/government.html#taxes) details more detailed ways to match the progressivity of the tax system.  But given limited data for Indonesia, we start with simple linear tax rates of 18% for effective tax rates on personal income, a 22% marginal tax rate on capital income, and a 22\% marginal tax rate on labor income.
 
 ## Corporate income taxes
 
-`OG-IDN` uses the top statutory rate of 27% for the corporate income tax rate.
+`OG-IDN` uses the top statutory rate of 22% for the corporate income tax rate.
 
 ## Value-added taxes
 
-A value-added tax rate of 15% is applied with the `tau_c` parameter.
+A value-added tax rate of 11% is applied with the `tau_c` parameter.
