@@ -73,9 +73,9 @@ def main():
     p2.baseline = False
     p2.output_base = reform_dir
 
-    # Parameter change for the reform run
+    # Parameter change for the reform run: corporate income tax rate cut
     updated_params_ref = {
-        "cit_rate": [[0.30]],
+        "cit_rate": [[0.20]],
     }
     p2.update_specifications(updated_params_ref)
 
