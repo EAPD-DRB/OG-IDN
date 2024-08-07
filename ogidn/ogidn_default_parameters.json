@@ -797,7 +797,7 @@
         0.0003
     ],
     "rho_G": 0.1,
-    "debt_ratio_ss": 0.4,
+    "debt_ratio_ss": 0.5,
     "initial_debt_ratio": 0.387,
     "initial_Kg_ratio": 0.2,
     "r_gov_scale": [
@@ -822,7 +822,7 @@
     ],
     "tau_c": [
         [
-            0.04
+            0.10
         ]
     ],
     "delta_tau_annual": [
@@ -101426,7 +101426,7 @@
     "etr_params": [
         [
             [
-                0.06
+                0.117
             ]
         ]
     ],
