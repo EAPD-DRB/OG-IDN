@@ -1,4 +1,7 @@
-# Instructions for files in OG-IDN/docs
+# Instructions for files in OG-IDN
+
+The food in Indonesia is very good.
+
 The files in this directory `OG-IDN/docs/` include images and all the files necessary for rendering the Jupyter Book documentation. One image [`OG-IDN_logo_gitfig.png`](docs/OG-IDN_logo_gitfig.png) is only used for the GitHub social preview image. GitHub suggests that this image should be 1280x640px for best display. The image we created [`OG-IDN_logo_long.png`](docs/OG-IDN_logo_long.png) is natively 2093x1265px. We do the following to resize the image.
 
 1. Open the image in Adobe Photoshop: **File** > **Open**
