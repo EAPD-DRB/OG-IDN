@@ -30,6 +30,7 @@ def main():
 
     # Directories to save data
     CUR_DIR = os.path.dirname(os.path.realpath(__file__))
+    base_dir_base = os.path.join(CUR_DIR, "OG-IDN-Example", "OUTPUT_BASELINE")
     save_dir = os.path.join(CUR_DIR, "OG-IDN-Example_gyup")
     base_dir = os.path.join(save_dir, "OUTPUT_BASELINE")
     reform_dir = os.path.join(save_dir, "OUTPUT_REFORM")
@@ -79,8 +80,7 @@ def main():
     #     "g_y_annual": 0.058,
     # }
     # p2.update_specifications(updated_params_ref)
-    p2.g_y = np.ones(p2.T + p2.S) * 0.058
-    p2.g_y[:5] = np.array([0.042, 0.046, 0.050, 0.054, 0.058])
+    p2.g_y = 0.058
 
     # Run model
     start_time = time.time()
@@ -93,8 +93,8 @@ def main():
     Save some results of simulations
     ---------------------------------------------------------------------------
     """
-    base_tpi = safe_read_pickle(os.path.join(base_dir, "TPI", "TPI_vars.pkl"))
-    base_params = safe_read_pickle(os.path.join(base_dir, "model_params.pkl"))
+    base_tpi = safe_read_pickle(os.path.join(base_dir_base, "TPI", "TPI_vars.pkl"))
+    base_params = safe_read_pickle(os.path.join(base_dir_base, "model_params.pkl"))
     reform_tpi = safe_read_pickle(
         os.path.join(reform_dir, "TPI", "TPI_vars.pkl")
     )
