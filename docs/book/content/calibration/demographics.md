@@ -303,7 +303,7 @@ We discuss the approach to estimating fertility rates $f_{s,t}$, mortality rates
   Original immigration rates vs. adjusted immigration rates to make fixed steady-state population distribution
   ```
 
-  The most recent year of population data come from {cite}`Census:2015` population estimates for both sexes for 2013. We those data and use the population transition matrix {eq}`EqPopLOMstatmat2` to age it to the current model year of 2015. We then use {eq}`EqPopLOMstatmat2` to generate the transition path of the population distribution over the time period of the model. {numref}`Figure %s <FigPopDistPath>` shows the progression from the 2013 population data to the fixed steady-state at period $t=120$. The time path of the growth rate of the economically active population $\tilde{g}_{n,t}$ is shown in {numref}`Figure %s <FigPopDistPath>`.
+  We begin with 2023 population data and use the population transition matrix {eq}`EqPopLOMstatmat2` to age it to the start year of the model (e.g., 2024 or 2025). We then use {eq}`EqPopLOMstatmat2` to generate the transition path of the population distribution over the time period of the model. {numref}`Figure %s <FigPopDistPath>` shows the progression from the 2023 population data to the fixed steady-state at period $t=120$. The time path of the growth rate of the economically active population $\tilde{g}_{n,t}$ is shown in {numref}`Figure %s <FigPopDistPath>`.
 
   ```{figure} ./images/pop_distribution.png
   ---
