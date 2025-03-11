@@ -18,7 +18,7 @@ class Calibration:
         macro_data_end_year=datetime.datetime(2024, 12, 31),
         demographic_data_path=None,
         output_path=None,
-        update_from_api=False
+        update_from_api=False,
     ):
         """
         Constructor for the Calibration class.
@@ -43,8 +43,9 @@ class Calibration:
 
         # Macro estimation
         self.macro_params = macro_params.get_macro_params(
-            macro_data_start_year, macro_data_end_year,
-            update_from_api=update_from_api
+            macro_data_start_year,
+            macro_data_end_year,
+            update_from_api=update_from_api,
         )
 
         # io matrix and alpha_c

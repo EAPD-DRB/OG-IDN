@@ -90,7 +90,6 @@ def get_macro_params(
             wb_data_q = wb_data_q.reset_index()
             wb_data_q = wb_data_q.set_index("year")
 
-
             # Function to get the latest valid data if baseline_YYYYQ is missing or NaN
             def get_valid_data(series, baseline_YYYYQ):
                 value = series.get(baseline_YYYYQ, None)
