@@ -56,6 +56,11 @@ For the March 17-21, 2025 United Nations `OG-IDN` training in Bandung, Indonesia
   - Presentation of projects <br> Future work, research, collaboration, final topics <br> Closing remarks
 ```
 
+### Other materials:
+
+  * [Slides from the 2-day workshop in August, 2024](https://eapd-drb.github.io/og-model/indonesia/)
+  * [UN OG Online Training Materials](https://eapd-drb.github.io/UN-OG-Training/)
+
 (Sec_UNtutor_python)=
 ## Install Python
 `OG-IDN` is a large-scale overlapping generations macroeconomic model of Philippine fiscal policy. It is written in the [Python](https://www.python.org/) programming language. You will need to have some distribution of Python loaded on your computer to run the code. We recommend installing the [Anaconda](https://www.anaconda.com/download) distribution of Python. This is the most widely used Python distribution. And it has package management features, like conda environments, that we will make use of.
