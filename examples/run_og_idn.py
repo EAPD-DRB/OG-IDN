@@ -6,7 +6,7 @@ import os
 import json
 import time
 import copy
-import importlib.resources
+from importlib.resources import files
 import matplotlib.pyplot as plt
 import ogcore
 from ogcore.parameters import Specifications
@@ -18,7 +18,7 @@ from ogidn.calibrate import Calibration
 from ogidn.utils import is_connected
 
 # Use a custom matplotlib style file for plots
-# plt.style.use("ogcore.OGcorePlots")
+plt.style.use("ogcore.OGcorePlots")
 
 
 def main():
@@ -46,9 +46,11 @@ def main():
         output_base=base_dir,
     )
     # Update parameters for baseline from default json file
-    with importlib.resources.open_text(
-        "ogidn", "ogidn_default_parameters.json"
-    ) as file:
+    with (
+        files("ogidn")
+        .joinpath("ogidn_default_parameters.json")
+        .open("r") as file
+    ):
         defaults = json.load(file)
     p.update_specifications(defaults)
     # Update parameters from calibrate.py Calibration class

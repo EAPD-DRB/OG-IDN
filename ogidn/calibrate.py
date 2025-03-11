@@ -15,17 +15,22 @@ class Calibration:
         self,
         p,
         macro_data_start_year=datetime.datetime(1947, 1, 1),
-        macro_data_end_year=datetime.date.today(),
+        macro_data_end_year=datetime.datetime(2024, 12, 31),
         demographic_data_path=None,
         output_path=None,
+        update_from_api=False,
     ):
         """
         Constructor for the Calibration class.
 
         Args:
             p (OG-Core Specifications object): model parameters
+            macro_data_start_year (datetime): start date for macro data
+            macro_data_end_year (datetime): end date for macro data
             demographic_data_path (str): path to save demographic data
             output_path (str): path to save output to
+            update_from_api (bool): Set True if you want to pull updated
+                macro data from World Bank and UN APIs
 
         Returns:
             None
@@ -38,7 +43,9 @@ class Calibration:
 
         # Macro estimation
         self.macro_params = macro_params.get_macro_params(
-            macro_data_start_year, macro_data_end_year
+            macro_data_start_year,
+            macro_data_end_year,
+            update_from_api=update_from_api,
         )
 
         # io matrix and alpha_c

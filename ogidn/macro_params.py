@@ -16,8 +16,9 @@ from io import StringIO
 
 def get_macro_params(
     data_start_date=datetime.datetime(1947, 1, 1),
-    data_end_date=datetime.date.today(),
+    data_end_date=datetime.datetime(2024, 12, 31),
     country_iso="IDN",
+    update_from_api=False,
 ):
     """
     Compute values of parameters that are derived from macro data
@@ -26,6 +27,8 @@ def get_macro_params(
         data_start_date (datetime): start date for data
         data_end_date (datetime): end date for data
         country_iso (str): ISO code for country
+        update_from_api (bool): Set True if you want to pull updated
+            macro data from World Bank and UN APIs
 
     Returns:
         macro_parameters (dict): dictionary of parameter values
@@ -57,116 +60,196 @@ def get_macro_params(
         "Gross PSD Gen Gov - percentage of GDP": "DP.DOD.DECT.CR.GG.Z1",
     }
 
-    try:
-        # pull series of interest from the WB using pandas_datareader
-        # Annual data
-        wb_data_a = wb.download(
-            indicator=wb_a_variable_dict.values(),
-            country=country_iso,
-            start=data_start_date,
-            end=data_end_date,
-        )
-        wb_data_a.rename(
-            columns=dict((y, x) for x, y in wb_a_variable_dict.items()),
-            inplace=True,
-        )
-        # Quarterly data
-        wb_data_q = wb.download(
-            indicator=wb_q_variable_dict.values(),
-            country=country_iso,
-            start=data_start_date,
-            end=data_end_date,
-        )
-        wb_data_q.rename(
-            columns=dict((y, x) for x, y in wb_q_variable_dict.items()),
-            inplace=True,
-        )
-        # Remove the hierarchical index (country and year) of
-        # wb_data_q and create a single row index using year
-        wb_data_q = wb_data_q.reset_index()
-        wb_data_q = wb_data_q.set_index("year")
-
-        # Compute macro parameters from WB data
-        macro_parameters["initial_debt_ratio"] = (
-            pd.Series(wb_data_q["Gross PSD Gen Gov - percentage of GDP"]).loc[
-                baseline_YYYYQ
-            ]
-        ) / 100
-        macro_parameters["initial_foreign_debt_ratio"] = pd.Series(
-            wb_data_q["Gross PSD USD - external creditors"]
-            / (
-                wb_data_q["Gross PSD USD - domestic creditors"]
-                + wb_data_q["Gross PSD USD - external creditors"]
+    if update_from_api:
+        try:
+            # pull series of interest from the WB using pandas_datareader
+            # Annual data
+            wb_data_a = wb.download(
+                indicator=wb_a_variable_dict.values(),
+                country=country_iso,
+                start=data_start_date,
+                end=data_end_date,
             )
-        ).loc[baseline_YYYYQ]
-        # zeta_D = share of new debt issues from government that are
-        # purchased by foreigners
-        macro_parameters["zeta_D"] = [
-            pd.Series(
-                wb_data_q["Gross PSD USD - external creditors"]
-                / (
+            wb_data_a.rename(
+                columns=dict((y, x) for x, y in wb_a_variable_dict.items()),
+                inplace=True,
+            )
+            # Quarterly data
+            wb_data_q = wb.download(
+                indicator=wb_q_variable_dict.values(),
+                country=country_iso,
+                start=data_start_date,
+                end=data_end_date,
+            )
+            wb_data_q.rename(
+                columns=dict((y, x) for x, y in wb_q_variable_dict.items()),
+                inplace=True,
+            )
+            # Remove the hierarchical index (country and year) of
+            # wb_data_q and create a single row index using year
+            wb_data_q = wb_data_q.reset_index()
+            wb_data_q = wb_data_q.set_index("year")
+
+            # Function to get the latest valid data if baseline_YYYYQ is missing or NaN
+            def get_valid_data(series, baseline_YYYYQ):
+                value = series.get(baseline_YYYYQ, None)
+
+                if pd.isna(value):
+                    latest_non_nan = series.dropna().last_valid_index()
+
+                    if latest_non_nan is not None:
+                        print(
+                            f"Warning: No data for {baseline_YYYYQ}. Using last available quarter: {latest_non_nan}"
+                        )
+                        value = series.get(latest_non_nan, None)
+                    else:
+                        print(
+                            "Warning: No historical data available. Skipping update."
+                        )
+                        value = None
+
+                return value
+
+            # Compute macro parameters from WB data
+            macro_parameters["initial_debt_ratio"] = get_valid_data(
+                pd.Series(wb_data_q["Gross PSD Gen Gov - percentage of GDP"])
+                / 100,
+                baseline_YYYYQ,
+            )
+            print(
+                f"initial_debt_ratio updated from World Bank API: {macro_parameters['initial_debt_ratio']}"
+            )
+            # Compute initial_foreign_debt_ratio safely
+            if (
+                "Gross PSD USD - external creditors" in wb_data_q.columns
+                and "Gross PSD USD - domestic creditors" in wb_data_q.columns
+            ):
+
+                total_debt = (
                     wb_data_q["Gross PSD USD - domestic creditors"]
                     + wb_data_q["Gross PSD USD - external creditors"]
                 )
-            ).loc[baseline_YYYYQ]
-        ]
-        macro_parameters["g_y_annual"] = (
-            wb_data_a["GDP per capita (constant 2015 US$)"]
-            .pct_change(-1)
-            .mean()
-        )
-    except:
-        print("Failed to retrieve data from World Bank")
-        print("Will not update the following parameters:")
-        print("[initial_debt_ratio, initial_foreign_debt_ratio, zeta_D, g_y]")
+
+                # Avoid division by zero
+                wb_data_q["foreign_debt_ratio"] = wb_data_q[
+                    "Gross PSD USD - external creditors"
+                ] / total_debt.replace(0, np.nan)
+
+                macro_parameters["initial_foreign_debt_ratio"] = (
+                    get_valid_data(
+                        wb_data_q["foreign_debt_ratio"], baseline_YYYYQ
+                    )
+                )
+            else:
+                print(
+                    "Warning: Missing debt variables in World Bank data. Skipping update for initial_foreign_debt_ratio."
+                )
+
+            print(
+                f"initial_foreign_debt_ratio updated from World Bank API: {macro_parameters['initial_foreign_debt_ratio']}"
+            )
+
+            # Compute zeta_D safely
+            macro_parameters["zeta_D"] = [
+                macro_parameters["initial_foreign_debt_ratio"]
+            ]  # Since it's the same formula, we use the same calculated value
+
+            print(
+                f"zeta_D updated from World Bank API: {macro_parameters['zeta_D']}"
+            )
+
+            # Compute annual GDP growth safely
+            if "GDP per capita (constant 2015 US$)" in wb_data_a.columns:
+                g_y_series = wb_data_a[
+                    "GDP per capita (constant 2015 US$)"
+                ].pct_change(-1)
+
+                # If all values are NaN, return None
+                macro_parameters["g_y_annual"] = (
+                    g_y_series.mean() if not g_y_series.isna().all() else None
+                )
+            else:
+                print(
+                    "Warning: Missing GDP per capita data in World Bank data. Skipping update for g_y_annual."
+                )
+
+            print(
+                f"g_y_annual updated from World Bank API: {macro_parameters['g_y_annual']}"
+            )
+        except:
+            print("Failed to retrieve data from World Bank")
+            print("Will not update the following parameters:")
+            print(
+                "[initial_debt_ratio, initial_foreign_debt_ratio, zeta_D, g_y]"
+            )
+    else:
+        print("Not updating from World Bank API")
 
     """
     Retrieve labour share data from the United Nations ILOSTAT Data API
     (see https://rshiny.ilo.org/dataexplorer9/?lang=en)
+    The series code is SDG_1041_NOC_RT_A (capital share)
+    Labor share (gamma) = 1 - capital share
+    If this fails we will not update gamma in 'default_parameters.json'
     """
-    target = (
-        "https://rplumber.ilo.org/data/indicator/"
-        + "?id=LAP_2GDP_NOC_RT_A"
-        + "&ref_area="
-        + str(country_iso)
-        + "&timefrom="
-        + str(data_start_date.year)
-        + "&timeto="
-        + str(data_end_date.year)
-        + "&type=both&format=.csv"
-    )
-    response = requests.get(target)
-    if response.status_code == 200:
-        csv_content = StringIO(response.text)
-        df_temp = pd.read_csv(csv_content)
-    else:
-        print(
-            f"Failed to retrieve data. HTTP status code: {response.status_code}"
-        )
-    ilo_data = df_temp[["time", "obs_value"]]
-    # find gamma, capital's share of income
-    macro_parameters["gamma"] = [
-        1
-        - (
-            (
-                ilo_data.loc[
-                    ilo_data["time"] == min(data_end_date.year, 2021),
-                    "obs_value",  # 2021 is latest year of data
-                ].squeeze()
+    if update_from_api:
+        try:
+            target = (
+                "https://rplumber.ilo.org/data/indicator/"
+                + "?id=SDG_1041_NOC_RT_A"
+                + "&ref_area="
+                + str(country_iso)
+                + "&timefrom="
+                + str(data_start_date.year)
+                + "&timeto="
+                + str(data_end_date.year)
+                + "&type=both&format=.csv"
             )
-            / 100
-        )
-    ]
+            # Add headers
+            headers = {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+            }
+
+            print("Attempting to update gamma from ILOSTAT")
+            response = requests.get(target, headers=headers)
+            if response.status_code != 200:
+                print(f"Error: Received status code {response.status_code}")
+            else:
+                print("Request successful.")
+            csv_content = StringIO(response.text)
+            df_temp = pd.read_csv(csv_content)
+            ilo_data = df_temp[["time", "obs_value"]]
+            # find gamma, capital's share of income
+            macro_parameters["gamma"] = [
+                1
+                - (
+                    (
+                        ilo_data.loc[
+                            ilo_data["time"] == data_end_date.year, "obs_value"
+                        ].squeeze()
+                    )
+                    / 100
+                )
+            ]
+            print(
+                f"gamma updated from ILOSTAT API: {macro_parameters['gamma']}"
+            )
+        except:
+            print("Failed to retrieve data from ILOSTAT")
+            print("Will not update gamma")
+    else:
+        print("Not updating from ILOSTAT API")
 
     """
     Calibrate parameters from IMF data
     """
-    # alpha_T, non-social security benefits as a fraction of GDP
-    # source: https://data.imf.org/?sk=b052f0f0-c166-43b6-84fa-47cccae3e219&hide_uv=1
-    macro_parameters["alpha_T"] = [0.013 - 0.0]
-    # alpha_G, gov't consumption expenditures as a fraction of GDP
-    # source: https://data.imf.org/?sk=edb0cd70-0af3-40e1-a9c3-bdef83ee4d1e&hide_uv=1
-    macro_parameters["alpha_G"] = [0.165 - 0.02 - 0.013]
+    if update_from_api:
+        # alpha_T, non-social security benefits as a fraction of GDP
+        # source: https://data.imf.org/?sk=b052f0f0-c166-43b6-84fa-47cccae3e219&hide_uv=1
+        macro_parameters["alpha_T"] = [0.013 - 0.0]
+        # alpha_G, gov't consumption expenditures as a fraction of GDP
+        # source: https://data.imf.org/?sk=edb0cd70-0af3-40e1-a9c3-bdef83ee4d1e&hide_uv=1
+        macro_parameters["alpha_G"] = [0.165 - 0.02 - 0.013]
 
     """"
     Esimate the discount on sovereign yields relative to private debt
@@ -192,7 +275,7 @@ def get_macro_params(
     res = mod.fit()
     # First term is the constant and needs to be divided by 100 to have
     # the correct unit. Second term is the coefficient
-    macro_parameters["r_gov_shift"] = [(-res.params[0] / 100)]
+    macro_parameters["r_gov_shift"] = [-res.params[0] / 100]
     macro_parameters["r_gov_scale"] = [res.params[1]]
 
     return macro_parameters
