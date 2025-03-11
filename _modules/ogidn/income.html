@@ -27,8 +27,8 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -205,6 +205,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../content/calibration/matching_lwi.html">Matching Labor, Wealth, and Income Moments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../content/calibration/exogenous_parameters.html">Exogenous Parameters</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">UN Tutorial</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../content/UNtutorial/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/UNtutorial/3perOG.html">A “Simple” 3-period-lived agent OG model</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../content/OGIDN_references.html">References</a></li>
@@ -362,15 +367,15 @@ document.write(`
                 <article class="bd-article">
                   
   <h1>Source code for ogidn.income</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="k">as</span> <span class="nn">opt</span>
-<span class="kn">import</span> <span class="nn">scipy.interpolate</span> <span class="k">as</span> <span class="nn">si</span>
-<span class="kn">from</span> <span class="nn">ogcore</span> <span class="kn">import</span> <span class="n">parameter_plots</span> <span class="k">as</span> <span class="n">pp</span>
-<span class="kn">from</span> <span class="nn">ogcore</span> <span class="kn">import</span> <span class="n">utils</span>
-<span class="kn">from</span> <span class="nn">ogcore.parameters</span> <span class="kn">import</span> <span class="n">Specifications</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">urllib.request</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">opt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.interpolate</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">si</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ogcore</span><span class="w"> </span><span class="kn">import</span> <span class="n">parameter_plots</span> <span class="k">as</span> <span class="n">pp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ogcore</span><span class="w"> </span><span class="kn">import</span> <span class="n">utils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ogcore.parameters</span><span class="w"> </span><span class="kn">import</span> <span class="n">Specifications</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
 
 <span class="n">CUR_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
 <span class="n">OUTPUT_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">CUR_PATH</span><span class="p">,</span> <span class="s2">&quot;OUTPUT&quot;</span><span class="p">,</span> <span class="s2">&quot;ability&quot;</span><span class="p">)</span>
@@ -378,7 +383,7 @@ document.write(`
 
 <div class="viewcode-block" id="get_e_interp">
 <a class="viewcode-back" href="../../content/api/income.html#ogidn.income.get_e_interp">[docs]</a>
-<span class="k">def</span> <span class="nf">get_e_interp</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_e_interp</span><span class="p">(</span>
     <span class="n">E</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">lambdas</span><span class="p">,</span> <span class="n">age_wgts</span><span class="p">,</span> <span class="n">gini_to_match</span><span class="o">=</span><span class="mf">38.3</span><span class="p">,</span> <span class="n">plot_path</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -433,7 +438,7 @@ document.write(`
     <span class="c1"># gives the same ratio between the model implied Gini&#39;s in the USA</span>
     <span class="c1"># and the target country and the empirical Gini&#39;s in the USA and given</span>
     <span class="c1"># by gin_to_match for the target country</span>
-    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span>
         <span class="n">a</span><span class="p">,</span>
         <span class="n">emat_orig</span><span class="p">,</span>
         <span class="n">age_wgts</span><span class="p">,</span>

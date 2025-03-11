@@ -28,8 +28,8 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -205,6 +205,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../calibration/UBI.html">Universal Basic Income (UBI)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../calibration/matching_lwi.html">Matching Labor, Wealth, and Income Moments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../calibration/exogenous_parameters.html">Exogenous Parameters</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">UN Tutorial</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../UNtutorial/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UNtutorial/3perOG.html">A “Simple” 3-period-lived agent OG model</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul class="nav bd-sidenav">
@@ -433,7 +438,7 @@ Sector Debt (QPSD) database, the IMF, and UN ILO to find values for
 parameters for the OG-IDN model that rely on macro data for calibration.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="ogidn.macro_params.get_macro_params">
-<span class="sig-prename descclassname"><span class="pre">ogidn.macro_params.</span></span><span class="sig-name descname"><span class="pre">get_macro_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_start_date</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">datetime.datetime(1947,</span> <span class="pre">1,</span> <span class="pre">1)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_end_date</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">datetime.date.today()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">country_iso</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'IDN'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/ogidn/macro_params.html#get_macro_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ogidn.macro_params.get_macro_params" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">ogidn.macro_params.</span></span><span class="sig-name descname"><span class="pre">get_macro_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_start_date</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">datetime.datetime(1947,</span> <span class="pre">1,</span> <span class="pre">1)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_end_date</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">datetime.datetime(2024,</span> <span class="pre">12,</span> <span class="pre">31)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">country_iso</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'IDN'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update_from_api</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/ogidn/macro_params.html#get_macro_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ogidn.macro_params.get_macro_params" title="Link to this definition">#</a></dt>
 <dd><p>Compute values of parameters that are derived from macro data</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -441,6 +446,8 @@ parameters for the OG-IDN model that rely on macro data for calibration.</p>
 <li><p><strong>data_start_date</strong> (<em>datetime</em>) – start date for data</p></li>
 <li><p><strong>data_end_date</strong> (<em>datetime</em>) – end date for data</p></li>
 <li><p><strong>country_iso</strong> (<em>str</em>) – ISO code for country</p></li>
+<li><p><strong>update_from_api</strong> (<em>bool</em>) – Set True if you want to pull updated
+macro data from World Bank and UN APIs</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

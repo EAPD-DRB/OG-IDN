@@ -28,8 +28,8 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -207,6 +207,11 @@
 <li class="toctree-l1"><a class="reference internal" href="UBI.html">Universal Basic Income (UBI)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="matching_lwi.html">Matching Labor, Wealth, and Income Moments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exogenous_parameters.html">Exogenous Parameters</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">UN Tutorial</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../UNtutorial/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UNtutorial/3perOG.html">A “Simple” 3-period-lived agent OG model</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul class="nav bd-sidenav">
@@ -455,8 +460,8 @@ document.write(`
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">ogcore.demographics</span> <span class="k">as</span> <span class="nn">demog</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ogcore.demographics</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">demog</span>
 <span class="n">plot_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;images&#39;</span><span class="p">)</span>
 
 <span class="n">fert_rates</span><span class="p">,</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">demog</span><span class="o">.</span><span class="n">get_fert</span><span class="p">(</span>
@@ -478,7 +483,8 @@ document.write(`
 </details>
 </div>
 <figure class="align-default" id="figfertratesidn">
-<a class="reference internal image-reference" href="../../_images/fert_rates.png"><img alt="../../_images/fert_rates.png" src="../../_images/fert_rates.png" style="height: 400px;" /></a>
+<a class="reference internal image-reference" href="../../_images/fert_rates.png"><img alt="../../_images/fert_rates.png" src="../../_images/fert_rates.png" style="height: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1 </span><span class="caption-text">Indonesia fertility rates by age <span class="math notranslate nohighlight">\(\left(f_s\right)\)</span> for <span class="math notranslate nohighlight">\(E+S=100\)</span>: year 2023</span><a class="headerlink" href="#figfertratesidn" title="Link to this image">#</a></p>
 </figcaption>
@@ -496,9 +502,9 @@ document.write(`
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">ogcore.demographics</span> <span class="k">as</span> <span class="nn">demog</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ogcore.demographics</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">demog</span>
 
 <span class="n">plot_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;images&#39;</span><span class="p">)</span>
 <span class="n">mort_rates</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">demog</span><span class="o">.</span><span class="n">get_mort</span><span class="p">(</span>
@@ -522,7 +528,8 @@ document.write(`
 </details>
 </div>
 <figure class="align-default" id="figmortratesidn">
-<a class="reference internal image-reference" href="../../_images/mort_rates.png"><img alt="../../_images/mort_rates.png" src="../../_images/mort_rates.png" style="height: 400px;" /></a>
+<a class="reference internal image-reference" href="../../_images/mort_rates.png"><img alt="../../_images/mort_rates.png" src="../../_images/mort_rates.png" style="height: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 2 </span><span class="caption-text">Indonesia mortality rates by age <span class="math notranslate nohighlight">\(\left(\rho_{s,t}\right)\)</span> for <span class="math notranslate nohighlight">\(E+S=100\)</span>: year 2023</span><a class="headerlink" href="#figmortratesidn" title="Link to this image">#</a></p>
 </figcaption>
@@ -541,9 +548,9 @@ document.write(`
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">ogcore.demographics</span> <span class="k">as</span> <span class="nn">demog</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ogcore.demographics</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">demog</span>
 <span class="n">plot_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;images&#39;</span><span class="p">)</span>
 
 <span class="n">imm_rates</span><span class="p">,</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">demog</span><span class="o">.</span><span class="n">get_imm_rates</span><span class="p">(</span>
@@ -569,7 +576,8 @@ document.write(`
 </details>
 </div>
 <figure class="align-default" id="figimmratesidn">
-<a class="reference internal image-reference" href="../../_images/imm_rates.png"><img alt="../../_images/imm_rates.png" src="../../_images/imm_rates.png" style="height: 400px;" /></a>
+<a class="reference internal image-reference" href="../../_images/imm_rates.png"><img alt="../../_images/imm_rates.png" src="../../_images/imm_rates.png" style="height: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 3 </span><span class="caption-text">Indonesia immigration rates by age <span class="math notranslate nohighlight">\(\left(i_s\right)\)</span> for <span class="math notranslate nohighlight">\(E+S=100\)</span>: year 2023</span><a class="headerlink" href="#figimmratesidn" title="Link to this image">#</a></p>
 </figcaption>
@@ -661,21 +669,24 @@ First, note that the matrix <span class="math notranslate nohighlight">\(\boldsy
 <p>For a full treatment and proof of the Perron-Frobenius Theorem, see <span id="id6">[<a class="reference internal" href="../OGIDN_references.html#id67" title="Kotaro Suzumura. Perron-frobenius theorem on non-negative square matrices: an elementary proof. Hitotsubashi Journal of Economics, 24:137-141, 1983.">Suzumura, 1983</a>]</span>. Because the population growth process is exogenous to the model, we calibrate it to annual age data for age years <span class="math notranslate nohighlight">\(s=1\)</span> to <span class="math notranslate nohighlight">\(s=100\)</span>.</p>
 <p><a class="reference internal" href="#figorigvsfixsspop"><span class="std std-numref">Figure 4</span></a> shows the steady-state population distribution <span class="math notranslate nohighlight">\(\boldsymbol{\bar{\omega}}\)</span> and the population distribution after 120 periods <span class="math notranslate nohighlight">\(\boldsymbol{\hat{\omega}}_{120}\)</span>. Although the two distributions look very close to each other, they are not exactly the same.</p>
 <figure class="align-default" id="figorigvsfixsspop">
-<a class="reference internal image-reference" href="../../_images/OrigVsFixSSpop.png"><img alt="../../_images/OrigVsFixSSpop.png" src="../../_images/OrigVsFixSSpop.png" style="height: 500px;" /></a>
+<a class="reference internal image-reference" href="../../_images/OrigVsFixSSpop.png"><img alt="../../_images/OrigVsFixSSpop.png" src="../../_images/OrigVsFixSSpop.png" style="height: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 4 </span><span class="caption-text">Theoretical steady-state population distribution vs. population distribution at period <span class="math notranslate nohighlight">\(t=120\)</span></span><a class="headerlink" href="#figorigvsfixsspop" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Further, we find that the maximum absolute difference between the population levels <span class="math notranslate nohighlight">\(\hat{\omega}_{s,t}\)</span> and <span class="math notranslate nohighlight">\(\hat{\omega}_{s,t+1}\)</span> was around <span class="math notranslate nohighlight">\(1\times 10^{-5}\)</span> after 160 periods. That is to say, that after 160 periods, given the estimated mortality, fertility, and immigration rates, the population has not achieved its steady state. For convergence in our solution method over a reasonable time horizon, we want the population to reach a stationary distribution after <span class="math notranslate nohighlight">\(T\)</span> periods. To do this, we artificially impose that the population distribution in period <span class="math notranslate nohighlight">\(t=120\)</span> is the steady-state. As can be seen from <a class="reference internal" href="#figorigvsfixsspop"><span class="std std-numref">Figure 4</span></a>, this assumption is not very restrictive. <a class="reference internal" href="#figimmratechg"><span class="std std-numref">Figure 5</span></a> shows the change in immigration rates that would make the period <span class="math notranslate nohighlight">\(t=120\)</span> population distribution equal be the steady-state. The maximum absolute difference between any two corresponding immigration rates in <a class="reference internal" href="#figimmratechg"><span class="std std-numref">Figure 5</span></a> is 0.0028.</p>
 <figure class="align-default" id="figimmratechg">
-<a class="reference internal image-reference" href="../../_images/OrigVsAdjImm.png"><img alt="../../_images/OrigVsAdjImm.png" src="../../_images/OrigVsAdjImm.png" style="height: 500px;" /></a>
+<a class="reference internal image-reference" href="../../_images/OrigVsAdjImm.png"><img alt="../../_images/OrigVsAdjImm.png" src="../../_images/OrigVsAdjImm.png" style="height: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 5 </span><span class="caption-text">Original immigration rates vs. adjusted immigration rates to make fixed steady-state population distribution</span><a class="headerlink" href="#figimmratechg" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We begin with 2023 population data and use the population transition matrix <a class="reference internal" href="#equation-eqpoplomstatmat2">(11)</a> to age it to the start year of the model (e.g., 2024 or 2025). We then use <a class="reference internal" href="#equation-eqpoplomstatmat2">(11)</a> to generate the transition path of the population distribution over the time period of the model. <a class="reference internal" href="#figpopdistpath"><span class="std std-numref">Figure 6</span></a> shows the progression from the 2023 population data to the fixed steady-state at period <span class="math notranslate nohighlight">\(t=120\)</span>. The time path of the growth rate of the economically active population <span class="math notranslate nohighlight">\(\tilde{g}_{n,t}\)</span> is shown in <a class="reference internal" href="#figpopdistpath"><span class="std std-numref">Figure 6</span></a>.</p>
 <figure class="align-default" id="figpopdistpath">
-<a class="reference internal image-reference" href="../../_images/pop_distribution.png"><img alt="../../_images/pop_distribution.png" src="../../_images/pop_distribution.png" style="height: 500px;" /></a>
+<a class="reference internal image-reference" href="../../_images/pop_distribution.png"><img alt="../../_images/pop_distribution.png" src="../../_images/pop_distribution.png" style="height: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 6 </span><span class="caption-text">Exogenous stationary population distribution at periods along transition path</span><a class="headerlink" href="#figpopdistpath" title="Link to this image">#</a></p>
 </figcaption>
@@ -687,9 +698,9 @@ First, note that the matrix <span class="math notranslate nohighlight">\(\boldsy
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">ogcore.demographics</span> <span class="k">as</span> <span class="nn">demog</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ogcore.demographics</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">demog</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="n">YEAR_TO_PLOT</span> <span class="o">=</span> <span class="mi">2023</span>
 <span class="n">plot_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;images&#39;</span><span class="p">)</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">plot_pop_growth</span><span class="p">(</span>
@@ -717,7 +728,8 @@ First, note that the matrix <span class="math notranslate nohighlight">\(\boldsy
 </details>
 </div>
 <figure class="align-default" id="figgrowthpath">
-<a class="reference internal image-reference" href="../../_images/population_growth_rates.png"><img alt="../../_images/population_growth_rates.png" src="../../_images/population_growth_rates.png" style="height: 500px;" /></a>
+<a class="reference internal image-reference" href="../../_images/population_growth_rates.png"><img alt="../../_images/population_growth_rates.png" src="../../_images/population_growth_rates.png" style="height: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 7 </span><span class="caption-text">Time path of the population growth rate <span class="math notranslate nohighlight">\(\tilde{g}_{n,t}\)</span></span><a class="headerlink" href="#figgrowthpath" title="Link to this image">#</a></p>
 </figcaption>
