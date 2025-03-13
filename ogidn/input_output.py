@@ -5,21 +5,24 @@ from ogidn.constants import CONS_DICT, PROD_DICT
 
 
 CUR_DIR = os.path.dirname(os.path.realpath(__file__))
-"""
-Read in Social Accounting Matrix (SAM) file
-"""
-# Read in SAM file
-# SAM file:
-sam_path = os.path.join(CUR_DIR, "data", "002_IFPRI_SAM_IDN_2018_SAM.csv")
-SAM = pd.read_csv(
-    sam_path,
-    index_col=1,
-)
-# replace NaN with 0
-SAM.fillna(0, inplace=True)
 
 
-def get_alpha_c(sam=SAM, cons_dict=CONS_DICT):
+def read_SAM():
+    """
+    Read in Social Accounting Matrix (SAM) file
+    """
+    sam_path = os.path.join(CUR_DIR, "data", "002_IFPRI_SAM_IDN_2018_SAM.csv")
+    SAM = pd.read_csv(
+        sam_path,
+        index_col=1,
+    )
+    # replace NaN with 0
+    SAM.fillna(0, inplace=True)
+
+    return SAM
+
+
+def get_alpha_c(sam=None, cons_dict=CONS_DICT):
     """
     Calibrate the alpha_c vector, showing the shares of household
     expenditures for each consumption category
@@ -31,7 +34,8 @@ def get_alpha_c(sam=SAM, cons_dict=CONS_DICT):
     Returns:
         alpha_c (dict): Dictionary of shares of household expenditures
     """
-
+    if sam is None:
+        sam = read_SAM()
     hh_cols = [
         "hhd-r1",
         "hhd-r2",
@@ -57,7 +61,7 @@ def get_alpha_c(sam=SAM, cons_dict=CONS_DICT):
     return alpha_c
 
 
-def get_io_matrix(sam=SAM, cons_dict=CONS_DICT, prod_dict=PROD_DICT):
+def get_io_matrix(sam=None, cons_dict=CONS_DICT, prod_dict=PROD_DICT):
     """
     Calibrate the io_matrix array.  This array relates the share of each
     production category in each consumption category
@@ -70,6 +74,8 @@ def get_io_matrix(sam=SAM, cons_dict=CONS_DICT, prod_dict=PROD_DICT):
     Returns:
         io_df (pd.DataFrame): Dataframe of io_matrix
     """
+    if sam is None:
+        sam = read_SAM()
     # Create initial matrix as dataframe of 0's to fill in
     io_dict = {}
     for key in prod_dict.keys():

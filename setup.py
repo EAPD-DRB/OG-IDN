@@ -5,7 +5,7 @@ with open("README.md", "r") as readme_file:
 
 setuptools.setup(
     name="ogidn",
-    version="0.0.3",
+    version="0.0.4",
     author="Marcelo LaFleur, Richard W. Evans, and Jason DeBacker",
     license="CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
     description="Indonesia (IDN) Calibration for OG-Core",
@@ -18,7 +18,13 @@ setuptools.setup(
         "Issue Tracker": "https://github.com/EAPD-DRB/OG-IDN/issues",
     },
     packages=["ogidn"],
-    package_data={"ogidn": ["ogidn_default_parameters.json", "data/*"]},
+    package_data={
+        "ogidn": [
+            "ogidn_default_parameters.json",
+            "ogidn_multisector_default_parameters.json",
+            "data/*",
+        ]
+    },
     include_packages=True,
     python_requires=">=3.7.7, <3.12",
     install_requires=[
