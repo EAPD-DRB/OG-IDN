@@ -374,23 +374,26 @@ document.write(`
 
 
 <span class="n">CUR_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Read in Social Accounting Matrix (SAM) file</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="c1"># Read in SAM file</span>
-<span class="c1"># SAM file:</span>
-<span class="n">sam_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">CUR_DIR</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;002_IFPRI_SAM_IDN_2018_SAM.csv&quot;</span><span class="p">)</span>
-<span class="n">SAM</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
-    <span class="n">sam_path</span><span class="p">,</span>
-    <span class="n">index_col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="c1"># replace NaN with 0</span>
-<span class="n">SAM</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">read_SAM</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read in Social Accounting Matrix (SAM) file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sam_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">CUR_DIR</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;002_IFPRI_SAM_IDN_2018_SAM.csv&quot;</span><span class="p">)</span>
+    <span class="n">SAM</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+        <span class="n">sam_path</span><span class="p">,</span>
+        <span class="n">index_col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># replace NaN with 0</span>
+    <span class="n">SAM</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">SAM</span>
 
 
 <div class="viewcode-block" id="get_alpha_c">
 <a class="viewcode-back" href="../../content/api/input_output.html#ogidn.input_output.get_alpha_c">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">get_alpha_c</span><span class="p">(</span><span class="n">sam</span><span class="o">=</span><span class="n">SAM</span><span class="p">,</span> <span class="n">cons_dict</span><span class="o">=</span><span class="n">CONS_DICT</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_alpha_c</span><span class="p">(</span><span class="n">sam</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cons_dict</span><span class="o">=</span><span class="n">CONS_DICT</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calibrate the alpha_c vector, showing the shares of household</span>
 <span class="sd">    expenditures for each consumption category</span>
@@ -402,7 +405,8 @@ document.write(`
 <span class="sd">    Returns:</span>
 <span class="sd">        alpha_c (dict): Dictionary of shares of household expenditures</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
+    <span class="k">if</span> <span class="n">sam</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">sam</span> <span class="o">=</span> <span class="n">read_SAM</span><span class="p">()</span>
     <span class="n">hh_cols</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s2">&quot;hhd-r1&quot;</span><span class="p">,</span>
         <span class="s2">&quot;hhd-r2&quot;</span><span class="p">,</span>
@@ -431,7 +435,7 @@ document.write(`
 
 <div class="viewcode-block" id="get_io_matrix">
 <a class="viewcode-back" href="../../content/api/input_output.html#ogidn.input_output.get_io_matrix">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">get_io_matrix</span><span class="p">(</span><span class="n">sam</span><span class="o">=</span><span class="n">SAM</span><span class="p">,</span> <span class="n">cons_dict</span><span class="o">=</span><span class="n">CONS_DICT</span><span class="p">,</span> <span class="n">prod_dict</span><span class="o">=</span><span class="n">PROD_DICT</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_io_matrix</span><span class="p">(</span><span class="n">sam</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cons_dict</span><span class="o">=</span><span class="n">CONS_DICT</span><span class="p">,</span> <span class="n">prod_dict</span><span class="o">=</span><span class="n">PROD_DICT</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calibrate the io_matrix array.  This array relates the share of each</span>
 <span class="sd">    production category in each consumption category</span>
@@ -444,6 +448,8 @@ document.write(`
 <span class="sd">    Returns:</span>
 <span class="sd">        io_df (pd.DataFrame): Dataframe of io_matrix</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">sam</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">sam</span> <span class="o">=</span> <span class="n">read_SAM</span><span class="p">()</span>
     <span class="c1"># Create initial matrix as dataframe of 0&#39;s to fill in</span>
     <span class="n">io_dict</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">prod_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
