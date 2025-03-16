@@ -36,5 +36,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - This version is a pre-release alpha. The example run script OG-IDN/examples/run_og_idn.py runs, but the model is not currently calibrated to represent the Indonesian economy and population.
 
 
+[0.0.5]: https://github.com/EAPD-DRB/OG-IDN/compare/v0.0.4...v0.0.5
 [0.0.4]: https://github.com/EAPD-DRB/OG-IDN/compare/v0.0.3...v0.0.4
 [0.0.3]: https://github.com/EAPD-DRB/OG-IDN/compare/v0.0.0...v0.0.3
