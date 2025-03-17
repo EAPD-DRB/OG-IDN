@@ -5,7 +5,7 @@ with open("README.md", "r") as readme_file:
 
 setuptools.setup(
     name="ogidn",
-    version="0.0.5",
+    version="0.0.6",
     author="Marcelo LaFleur, Richard W. Evans, and Jason DeBacker",
     license="CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
     description="Indonesia (IDN) Calibration for OG-Core",
@@ -26,7 +26,7 @@ setuptools.setup(
         ]
     },
     include_packages=True,
-    python_requires=">=3.7.7, <3.12",
+    python_requires=">=3.7.7, <3.13",
     install_requires=[
         "numpy",
         "psutil",
@@ -54,8 +54,8 @@ setuptools.setup(
         "License :: OSI Approved :: Common Public License",
         "Operating System :: POSIX",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Topic :: Scientific/Engineering :: Information Analysis",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
