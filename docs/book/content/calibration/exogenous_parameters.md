@@ -1,14 +1,13 @@
 ---
 jupytext:
+  formats: md:myst
   text_representation:
     extension: .md
     format_name: myst
-    format_version: '0.8'
-    jupytext_version: '1.4.1'
 kernelspec:
   display_name: Python 3
   language: python
-  name: ogidn-dev
+  name: python3
 ---
 
 (Chap_Exog)=
@@ -113,4 +112,3 @@ kernelspec:
 | $\texttt{maxiter}$               | Maximum number of iterations for TPI                                    | 250                                                   |
 | $\texttt{mindist_SS}$           | SS solution tolerance                                                   | 1.00E-09                                              |
 | $\texttt{mindist_TPI}$          | TPI solution tolerance                                                  | 1.00E-05                                              |
-
