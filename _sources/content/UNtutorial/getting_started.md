@@ -24,36 +24,47 @@ For the March 17-21, 2025 United Nations `OG-IDN` training in Bandung, Indonesia
 * - Day
   - Session
   - Topic
+  - Materials
 * - Mon.
   - Morning
   - Organizer introductions <br> [Setup Python](https://eapd-drb.github.io/OG-IDN/content/UNtutorial/getting_started.html#install-python), [Git, GitHub](https://eapd-drb.github.io/OG-IDN/content/UNtutorial/getting_started.html#installing-git-and-github), and [OG-IDN](https://eapd-drb.github.io/OG-IDN/content/UNtutorial/getting_started.html#fork-and-clone-og-idn-repository)
+  - [Intro slides](https://github.com/EAPD-DRB/OG-IDN/blob/main/docs/book/content/UNtutorial/materials/OG-IDN-Open.pdf)
 * -
   - Afternoon
   - Theory: ["Simple" 3-period-lived agent model](https://eapd-drb.github.io/OG-IDN/content/UNtutorial/3perOG.html)
+  - [Solutions](https://github.com/EAPD-DRB/OG-IDN/blob/main/docs/book/content/UNtutorial/solutions/3perOG/)
 * - Tue.
   - Morning
   - Review 3-period-lived-agent exercises (solutions in [this folder](https://github.com/EAPD-DRB/OG-IDN/blob/main/docs/book/content/UNtutorial/solutions/3perOG/)) <br> Review OG-Core and OG-IDN modules <br> Quick Git and GitHub workflow review
+  -
 * -
   - Afternoon
   - Running OG-IDN, inputs, outputs <br> <br> Calibrating OG-IDN, current state, still to do
+  - [I/O slides](https://github.com/EAPD-DRB/OG-IDN/blob/main/docs/book/content/UNtutorial/materials/OG-IDN-inputoutput.pdf) <br> [I/O Colab notebook](https://colab.research.google.com/drive/1H-byv7BYtzieXQMTyDhYjZMxVCVB5t7W?usp=sharing) <br> [Calibrate slides](https://github.com/EAPD-DRB/OG-IDN/blob/main/docs/book/content/UNtutorial/materials/OG-IDN-CurrentState.pdf)
 * - Wed.
   - Morning
   - Running OG-IDN: Revisit some reforms from 2-day visit <br> Talk about new reforms <br> Create project teams (see "[Research Projects](https://eapd-drb.github.io/OG-IDN/content/UNtutorial/projects.html)" chapter)
+  - [Reforms slides](https://github.com/EAPD-DRB/OG-IDN/blob/main/docs/book/content/UNtutorial/materials/OG-IDN-PrevAndNewReforms.pdf) <br> [Notebooks](https://github.com/EAPD-DRB/OG-IDN/blob/main/docs/book/content/UNtutorial/materials/PrevReformsNotebooks/notebooks) <br> [Run scripts](https://github.com/EAPD-DRB/OG-IDN/blob/main/docs/book/content/UNtutorial/materials/PrevReformsNotebooks/run_scripts)
 * -
   - Afternoon
   - OG-IDN output: Tools to visualize/tabulate output <br> OG-IDN built-in calibration helps
+  - [Built-in tools notebook](https://github.com/EAPD-DRB/OG-IDN/blob/main/docs/book/content/UNtutorial/materials/OG-IDN_builtintools.ipynb)
 * - Thu.
   - Morning
   - Calibrating OG-IDN: Issues and hot spots
+  -
 * -
   - Afternoon
   - Calibrating OG-IDN: Issues and hot spots
+  -
 * - Fri.
   - Morning
   - Open work, project hackathon, office hours <br> Advanced topics: Adding trade, connecting to other models
+  -
 * -
   - Afternoon
   - Presentation of projects <br> Future work, research, collaboration, final topics <br> Closing remarks
+  -
 ```
 
 ### Other materials:
