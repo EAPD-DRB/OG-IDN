@@ -8,7 +8,7 @@ logo                     : '..//OG-IDN_logo.png'
 ###############################################################################
 # Execution settings
 execute:
-  execute_notebooks      : force
+  execute_notebooks      : off
 
 ###############################################################################
 # Parse and render settings
