@@ -92,3 +92,25 @@ This sections contains the broad set of project descriptions brainstormed by the
 * - 17
   - Is the funding plan of the sovereign wealth fund sustainable?
 ```
+
+## Components of a good presentation
+
+A good presentation can be powerfully effective at communicating information and influencing opinions. And a bad presentation can have equal and opposite negative effects, The following are some basic components of a good presentation.
+
+**Components of a good presentation**
+
+1. Background
+    - Why should we care about this research?
+    - What are the important characteristics of the policy or economic environment?
+2. Research Question
+    - Narrower (more specific) better than broad
+    - Phrase your research question as a question: "How does increased education spending affect Indonesian GDP?"
+3. Data/Model/Calibration Details
+    - Did you do any specific calibration updates?
+    - Was there any compelling data?
+4. Results
+    - Present model results: macro, fiscal, distributional, other
+5. Conclusion
+    - Summarize results
+    - Acknowledge weaknesses and deficiencies
+    - Future direction
