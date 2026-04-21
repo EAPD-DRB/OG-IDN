@@ -50,7 +50,7 @@ Once the package is installed, one can adjust parameters in the OG-Core `Specifi
 from ogcore.parameters import Specifications
 from ogidn.calibrate import Calibration
 p = Specifications()
-c = Calibration(p)
+c = Calibration(p, update_from_api=True)
 updated_params = c.get_dict()
 p.update_specifications({'initial_debt_ratio': updated_params['initial_debt_ratio']})
 ```

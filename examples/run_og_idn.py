@@ -51,9 +51,11 @@ def main():
     ):
         defaults = json.load(file)
     p.update_specifications(defaults)
-    # Update parameters from calibrate.py Calibration class
+
     if is_connected():  # only update if connected to internet
-        c = Calibration(p)
+        c = Calibration(
+            p, update_from_api=False
+        )  # =True will update data from online sources
         updated_params = c.get_dict()
         p.update_specifications(updated_params)
 

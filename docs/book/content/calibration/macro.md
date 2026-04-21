@@ -34,7 +34,27 @@ We assume that there is a wedge between the real rate of return on private capit
     r_{gov,t} = (1-\tau_{d,t})r_t + \mu_d
 ```
 
-where $\tau_d$ is the scale parameter and $\mu_d$ is the level shift parameter.  We set the values of these two parameters to 0.245 and -0.034, respectively.  These are found by using the estimated relationship between corporate and sovereign yields in {cite}`LMW2023` (Table 8, Column 2) and simulating a series of corporate yields given a series of sovereign yields between 2% and 12%.  We then estimate the scale and level shift parameters that best fit these simulated data using ordinary least squares.
+where $\tau_d$ is the scale parameter and $\mu_d$ is the level shift parameter.  We set the values of these two parameters to 0.24485 and -0.03377, respectively.  These are found by using the estimated relationship between corporate and sovereign yields in {cite}`LMW2023` (Table 8, Column 2) and simulating a series of corporate yields given a series of sovereign yields between 2% and 12%.  We then estimate the scale and level shift parameters that best fit these simulated data using ordinary least squares.
+
+Because the inputs to this OLS are deterministic (a fixed quadratic over a fixed sovereign yield grid) and contain no Indonesia-specific data, the resulting values of `r_gov_scale` and `r_gov_shift` do not change across calibration runs.  Rather than refitting the same regression every time `get_macro_params(update_from_api=True)` is called, the packaged values in `ogidn/ogidn_default_parameters.json` (and `ogidn/ogidn_multisector_default_parameters.json`) are the authoritative source.  The snippet below reproduces them for reviewers and documents the methodology:
+
+```python
+import numpy as np
+import statsmodels.api as sm
+
+sov_y = np.arange(20, 120) / 10
+corp_yhat = 8.199 - (2.975 * sov_y) + (0.478 * sov_y**2)
+corp_yhat = sm.add_constant(corp_yhat)
+res = sm.OLS(sov_y, corp_yhat).fit()
+
+r_gov_shift = -res.params[0] / 100
+r_gov_scale = res.params[1]
+
+print(round(r_gov_shift, 5))  # -0.03377
+print(round(r_gov_scale, 5))  # 0.24485
+```
+
+If {cite}`LMW2023` is ever superseded by a follow-up study with revised coefficients, re-run the snippet above and update the JSON values (see [OG-IDN](https://github.com/EAPD-DRB/OG-IDN)).
 
 ### Aggregate transfers
 

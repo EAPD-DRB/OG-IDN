@@ -861,10 +861,10 @@
     "initial_debt_ratio": 0.387,
     "initial_Kg_ratio": 0.2,
     "r_gov_scale": [
-        0.2448476359365782
+        0.24485
     ],
     "r_gov_shift": [
-        -0.03376625043803517
+        -0.03377
     ],
     "cit_rate": [
         [
