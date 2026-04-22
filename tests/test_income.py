@@ -6,7 +6,6 @@ import pytest
 import numpy as np
 from ogidn import income
 
-
 # @pytest.mark.parametrize(
 #     "abil_wgts,expected_vals",
 #     [
