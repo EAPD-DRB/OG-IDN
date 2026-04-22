@@ -30,7 +30,7 @@ The production function is given as:
 
 In the default calibration, we set infrastructure's share of output to $\gamma_{g,m}=0.0$ for all sectors.  This parameter is hard to identify from national accounts data and would entail an empirical study to tease out the relationship between infrastructure and output.
 
-We use a default value of $\gamma =0.41$, which corresponds to one minus labor's share of output, where labor's share of output is found as 0.60 in in the [UN ILOSTAT database](https://rshiny.ilo.org/dataexplorer9/?lang=en).
+We use a default value of $\gamma = 0.41859$, which corresponds to one minus labor's share of output, where labor's share is taken from the UN ILOSTAT series `SDG_1041_NOC_RT_A` for Indonesia in 2024.
 
 ### Total factor productivity
 
