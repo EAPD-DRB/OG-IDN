@@ -13,7 +13,6 @@ from ogcore import output_plots as op
 from ogcore.execute import runner
 from ogcore.utils import safe_read_pickle
 from ogidn.calibrate import Calibration
-from ogidn.utils import is_connected
 
 # Use a custom matplotlib style file for plots
 plt.style.use("ogcore.OGcorePlots")
@@ -51,11 +50,12 @@ def main():
     ):
         defaults = json.load(file)
     p.update_specifications(defaults)
-    # Update parameters from calibrate.py Calibration class
-    if is_connected():  # only update if connected to internet
-        c = Calibration(p)
-        updated_params = c.get_dict()
-        p.update_specifications(updated_params)
+
+    c = Calibration(
+        p, update_from_api=False
+    )  # =True will update data from online sources
+    updated_params = c.get_dict()
+    p.update_specifications(updated_params)
 
     # Run model
     start_time = time.time()

@@ -1,9 +1,9 @@
 from ogidn import macro_params, income
 from ogidn import input_output as io
 import os
+import warnings
 import numpy as np
 import datetime
-from ogcore import demographics
 
 UN_COUNTRY_CODE = "360"
 
@@ -19,6 +19,8 @@ class Calibration:
         demographic_data_path=None,
         output_path=None,
         update_from_api=False,
+        imf_data_year=None,
+        imf_data_path=None,
     ):
         """
         Constructor for the Calibration class.
@@ -31,6 +33,8 @@ class Calibration:
             output_path (str): path to save output to
             update_from_api (bool): Set True if you want to pull updated
                 macro data from World Bank and UN APIs
+            imf_data_year (int | None): IMF target year override
+            imf_data_path (str | None): path to save IMF source data CSV
 
         Returns:
             None
@@ -41,73 +45,102 @@ class Calibration:
             if not os.path.exists(output_path):
                 os.makedirs(output_path)
 
+        # Initialize attributes. Only values refreshed successfully are
+        # returned by get_dict(), so p remains the baseline source.
+        self.macro_params = {}
+        self.demographic_params = {}
+        self.e = None
+        self.alpha_c = np.array([1.0]) if p.I == 1 else None
+        self.io_matrix = np.array([[1.0]]) if p.M == 1 else None
+
+        if not update_from_api:
+            return
+
         # Macro estimation
-        self.macro_params = macro_params.get_macro_params(
-            macro_data_start_year,
-            macro_data_end_year,
-            update_from_api=update_from_api,
-        )
+        try:
+            self.macro_params = macro_params.get_macro_params(
+                macro_data_start_year,
+                macro_data_end_year,
+                update_from_api=update_from_api,
+                imf_data_year=imf_data_year,
+                imf_data_path=imf_data_path,
+            )
+        except Exception as exc:
+            warnings.warn(f"Macro params update failed: {exc}", stacklevel=2)
 
         # io matrix and alpha_c
         if p.I > 1:  # no need if just one consumption good
-            alpha_c_dict = io.get_alpha_c()
-            # check that model dimensions are consistent with alpha_c
-            assert p.I == len(list(alpha_c_dict.keys()))
-            self.alpha_c = np.array(list(alpha_c_dict.values()))
-        else:
-            self.alpha_c = np.array([1.0])
+            try:
+                alpha_c_dict = io.get_alpha_c()
+                # check that model dimensions are consistent with alpha_c
+                assert p.I == len(list(alpha_c_dict.keys()))
+                self.alpha_c = np.array(list(alpha_c_dict.values()))
+            except Exception as exc:
+                warnings.warn(f"alpha_c update failed: {exc}", stacklevel=2)
         if p.M > 1:  # no need if just one production good
-            io_df = io.get_io_matrix()
-            # check that model dimensions are consistent with io_matrix
-            assert p.M == len(list(io_df.keys()))
-            self.io_matrix = io_df.values
-        else:
-            self.io_matrix = np.array([[1.0]])
+            try:
+                io_df = io.get_io_matrix()
+                # check that model dimensions are consistent with io_matrix
+                assert p.M == len(list(io_df.keys()))
+                self.io_matrix = io_df.values
+            except Exception as exc:
+                warnings.warn(f"io_matrix update failed: {exc}", stacklevel=2)
 
-        # demographics
-        self.demographic_params = demographics.get_pop_objs(
-            p.E,
-            p.S,
-            p.T,
-            0,
-            99,
-            country_id=UN_COUNTRY_CODE,
-            initial_data_year=p.start_year - 1,
-            final_data_year=p.start_year + 1,
-            GraphDiag=False,
-            download_path=demographic_data_path,
-        )
+        # demographics + earnings profiles
+        try:
+            from ogcore import demographics
 
-        # demographics for 80 period lives (needed for getting e below)
-        demog80 = demographics.get_pop_objs(
-            20,
-            80,
-            p.T,
-            0,
-            99,
-            country_id=UN_COUNTRY_CODE,
-            initial_data_year=p.start_year - 1,
-            final_data_year=p.start_year + 1,
-            GraphDiag=False,
-        )
+            self.demographic_params = demographics.get_pop_objs(
+                p.E,
+                p.S,
+                p.T,
+                0,
+                99,
+                country_id=UN_COUNTRY_CODE,
+                initial_data_year=p.start_year - 1,
+                final_data_year=p.start_year + 1,
+                GraphDiag=False,
+                download_path=demographic_data_path,
+            )
 
-        # earnings profiles
-        self.e = income.get_e_interp(
-            p.E,
-            p.S,
-            p.J,
-            p.lambdas,
-            demog80["omega_SS"],
-            plot_path=output_path,
-        )
+            # demographics for 80 period lives (needed for getting e below)
+            demog80 = demographics.get_pop_objs(
+                20,
+                80,
+                p.T,
+                0,
+                99,
+                country_id=UN_COUNTRY_CODE,
+                initial_data_year=p.start_year - 1,
+                final_data_year=p.start_year + 1,
+                GraphDiag=False,
+            )
+
+            self.e = income.get_e_interp(
+                p.E,
+                p.S,
+                p.J,
+                p.lambdas,
+                demog80["omega_SS"],
+                plot_path=output_path,
+            )
+        except Exception as exc:
+            warnings.warn(
+                f"Demographics/income update failed: {exc}", stacklevel=2
+            )
+            self.demographic_params = {}
+            self.e = None
 
     # method to return all newly calibrated parameters in a dictionary
     def get_dict(self):
-        dict = {}
-        dict.update(self.macro_params)
-        dict["e"] = self.e
-        dict["alpha_c"] = self.alpha_c
-        dict["io_matrix"] = self.io_matrix
-        dict.update(self.demographic_params)
+        d = {}
+        d.update(self.macro_params)
+        d.update(self.demographic_params)
+        if self.e is not None:
+            d["e"] = self.e
+        if self.alpha_c is not None:
+            d["alpha_c"] = self.alpha_c
+        if self.io_matrix is not None:
+            d["io_matrix"] = self.io_matrix
 
-        return dict
+        return d

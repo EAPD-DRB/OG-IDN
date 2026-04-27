@@ -3,7 +3,6 @@ import numpy as np
 import os
 from ogidn.constants import CONS_DICT, PROD_DICT
 
-
 CUR_DIR = os.path.dirname(os.path.realpath(__file__))
 
 
