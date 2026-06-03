@@ -6,7 +6,6 @@ This script creates tables and figures from the OG-IDN documentation.
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-import ogcore
 from ogcore.parameters import Specifications
 from ogcore import parameter_plots as pp
 from ogcore import demographics as demog

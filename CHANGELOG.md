@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.1.0] - 2026-06-03 12:00:00
+
+### Changed
+
+- Migrated the project from conda to uv. Install with `uv sync --extra dev`; `pyproject.toml` is the single source of truth for dependencies and `uv.lock` pins exact versions.
+- CI uses `astral-sh/setup-uv`, and ruff replaces black for formatting and linting (`check_format.yml` -> `check_ruff.yml`).
+- Updated the README, `AGENTS.md`, and the Makefile to the uv workflow.
+- Bumps `__version__` from `0.0.7` to `0.1.0`, syncing with the package version (the prior `__init__.py` was lagging behind `setup.py`).
+
+### Removed
+
+- `setup.py`, `environment.yml`, `pytest.ini`, and `MANIFEST.in` (their settings moved into `pyproject.toml`).
+
 ## [0.0.8] - 2025-08-15 21:00:00
 
 ### Added
@@ -55,6 +68,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - This version is a pre-release alpha. The example run script OG-IDN/examples/run_og_idn.py runs, but the model is not currently calibrated to represent the Indonesian economy and population.
 
+[0.1.0]: https://github.com/EAPD-DRB/OG-IDN/compare/v0.0.8...v0.1.0
 [0.0.8]: https://github.com/EAPD-DRB/OG-IDN/compare/v0.0.7...v0.0.8
 [0.0.7]: https://github.com/EAPD-DRB/OG-IDN/compare/v0.0.6...v0.0.7
 [0.0.6]: https://github.com/EAPD-DRB/OG-IDN/compare/v0.0.5...v0.0.6
