@@ -3,17 +3,33 @@
 
 ## Economic Assumptions
 
-As the default rate of labor augmenting technological change, $g_y$, we use a value of 3.8%.  The average annual growth rate in GDP per capita in Indonesia between 2007 and 2023 is 3.8% per year.
+As the default rate of labor augmenting technological change, $g_y$, we use a value of 3.71%. This is the average annual growth rate in GDP per capita in Indonesia over the 2000 to 2024 calibration window using the World Bank series employed in the baseline refresh. The 2000 start year is a structural-break boundary: it excludes the 1997-98 Asian Financial Crisis and the post-Suharto Reformasi transition, so the mean reflects Indonesia's modern macroeconomic regime rather than the one-off crisis contraction. The start year is exposed as the module-level constant `GDP_GROWTH_START_YEAR` in `ogidn/macro_params.py` and is passed directly to the World Bank WDI API as the lower bound of the request window.
+
+### Calibration vintage
+
+The packaged values in `ogidn/ogidn_default_parameters.json` are a snapshot of a refresh run. Each parameter uses the latest value available from its source at the time of that run:
+
+| Parameter | Source | Vintage |
+|---|---|---|
+| `g_y_annual` | World Bank WDI (GDP per capita, constant 2015 US$) | 2000–2024 mean |
+| `gamma` | ILOSTAT capital share | 2024 |
+| `initial_debt_ratio` | World Bank QPSD | 2024Q4 |
+| `initial_foreign_debt_ratio` | World Bank QPSD | 2024Q4 |
+| `zeta_D` | World Bank QPSD (same as above) | 2024Q4 |
+| `alpha_T` | IMF Government Finance Statistics | 2023 |
+| `alpha_G` | IMF Government Finance Statistics | 2023 |
+
+To refresh against newer source data, run `get_macro_params(update_from_api=True)` and commit the updated JSON.
 
 ## Open Economy Parameters
 
 ### Foreign holding of government debt in the initial period
 
-The path of foreign holding of domestic debt is endogenous, but the initial period stock of debt held by foreign investors is exogenous.  We set this parameter, `initial_foreign_debt_ratio` to 0.76, consistent with data from the Bank of Indonesia's Debt Statistics of Indonesia report.
+The path of foreign holding of domestic debt is endogenous, but the initial period stock of debt held by foreign investors is exogenous. We set this parameter, `initial_foreign_debt_ratio`, to 0.262 based on the World Bank Quarterly Public Sector Debt (QPSD) series for gross public sector debt held by domestic and external creditors in Indonesia in 2024Q4.
 
 ### Foreign purchases of newly issued debt
 
-We set $\zeta_D = 0.9$.  This is the average share of foreign purchases of newly issued government debt found from the World Bank WDI.
+We set $\zeta_D = 0.262$. In the current baseline calibration, this is aligned with the same World Bank QPSD-based foreign debt share used for `initial_foreign_debt_ratio`.
 
 ### Foreign holdings of excess capital
 
@@ -23,7 +39,7 @@ We set $\zeta_K = 0.9$. Note, this parameter is harder to pin down from the data
 
 ### Government Debt
 
-The path of government debt is endogenous.  But the initial value is exogenous.  To avoid converting between model units and dollars, we calibrate the initial debt to GDP ratio, rather than the dollar value of the debt.  This is the model parameter $\alpha_D$.  We compute this from the ratio of publicly held debt outstanding to GDP.  Based on 2023 values, this gives us a ratio of 0.398.
+The path of government debt is endogenous. But the initial value is exogenous. To avoid converting between model units and dollars, we calibrate the initial debt to GDP ratio, rather than the dollar value of the debt. This is the model parameter $\alpha_D$. We compute this from the World Bank QPSD general government debt-to-GDP series for Indonesia. Using 2024Q4 values gives an initial ratio of 0.390.
 
 #### Interest rates on government debt
 
@@ -73,10 +89,10 @@ For background on how this calibration was first derived, the slope/intercept ma
 
 ### Aggregate transfers
 
-Aggregate (non-Social Security) transfers to households are set as a share of GDP with the parameter $\alpha_T$. We exclude Social Security from transfers since it is modeled specifically. With this definition, the share of transfers to GDP in 2015 is 1.3% according to [IMF data](https://data.imf.org/?sk=b052f0f0-c166-43b6-84fa-47cccae3e219&hide_uv=1).
+Aggregate (non-Social Security) transfers to households are set as a share of GDP with the parameter $\alpha_T$. We exclude Social Security from transfers since it is modeled specifically. In the current baseline, `alpha_T = 0.00776`, computed from IMF Government Finance Statistics Statement of Operations data as total social benefits less social security benefits, expressed as a share of GDP. For the default target year of 2024, the latest complete IMF year available is 2023, so the baseline uses that year.
 
 ### Government expenditures
 
 Government spending on goods and services are also set as a share of GDP with the parameter $\alpha_G$. We define government spending as:
     <center>Government Spending = Total Outlays - Transfers - Net Interest on Debt - Social Security</center>
-With this definition, the share of government expenditure to GDP is 13.2% based on [data from the IMF](https://data.imf.org/?sk=b052f0f0-c166-43b6-84fa-47cccae3e219&hide_uv=1).
+With this definition, the share of government expenditure to GDP is 11.13% in the current baseline, based on IMF Government Finance Statistics Statement of Operations data. As with `alpha_T`, the default target year is 2024, but the baseline uses the latest complete IMF year available at or before that year, which is currently 2023.

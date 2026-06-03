@@ -12,6 +12,11 @@ import datetime
 from io import StringIO
 from pathlib import Path
 
+# Post-Asian-Financial-Crisis / post-Reformasi regime boundary.
+# Used as the start year for the g_y_annual GDP-per-capita growth window
+# so the mean reflects Indonesia's modern regime, not the 1997-98 crash.
+GDP_GROWTH_START_YEAR = 2000
+
 
 def _fetch_wb_data(indicators, country_iso, start_year, end_year, source):
     """
@@ -85,6 +90,10 @@ def _fetch_wb_data(indicators, country_iso, start_year, end_year, source):
 def _get_imf_macro_params(country_iso, target_year, data_path=None):
     """
     Fetch IMF GFS data and compute alpha_T and alpha_G.
+
+    IMF GFS publishes with a lag. If target_year is not yet available, the
+    function falls back to the latest complete year and logs it. See the
+    "Calibration vintage" table in docs/book/content/calibration/macro.md.
 
     Args:
         country_iso (str): ISO alpha-3 country code
@@ -247,6 +256,10 @@ def get_macro_params(
         "Gross PSD USD - external creditors": "DP.DOD.DECX.CR.PS.CD",
         "Gross PSD Gen Gov - percentage of GDP": "DP.DOD.DECT.CR.GG.Z1",
     }
+    # Packaged baseline values for g_y_annual, initial_debt_ratio,
+    # initial_foreign_debt_ratio, and zeta_D are sourced from these World
+    # Bank WDI and QPSD series for Indonesia. g_y_annual uses a
+    # GDP_GROWTH_START_YEAR-onward window (post-AFC / post-Reformasi).
 
     # Function to get the latest valid data if baseline_YYYYQ is missing or NaN
     def get_valid_data(series, baseline_YYYYQ):
@@ -274,7 +287,7 @@ def get_macro_params(
             wb_data_a = _fetch_wb_data(
                 wb_a_variable_dict,
                 country_iso,
-                data_start_date.year,
+                GDP_GROWTH_START_YEAR,
                 data_end_date.year,
                 source=2,
             )
@@ -396,6 +409,8 @@ def get_macro_params(
     Labor share (gamma) = 1 - capital share
     If this fails we will not update gamma in 'default_parameters.json'
     """
+    # The packaged baseline gamma value is sourced from ILOSTAT series
+    # SDG_1041_NOC_RT_A for Indonesia.
     if update_from_api:
         try:
             target = (
