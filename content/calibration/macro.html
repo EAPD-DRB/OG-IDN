@@ -16,43 +16,46 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/exercise.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=f281be69"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -69,6 +72,7 @@
     <link rel="prev" title="Calibration of Firms Parameters" href="firms.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -84,19 +88,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../../search.html"
       method="get">
@@ -104,7 +97,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -112,8 +104,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -129,7 +121,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -159,21 +152,17 @@
     
     
     <img src="../../_static/OG-IDN_logo.png" class="logo__image only-light" alt="OG-IDN - Home"/>
-    <script>document.write(`<img src="../../_static/OG-IDN_logo.png" class="logo__image only-dark" alt="OG-IDN - Home"/>`);</script>
+    <img src="../../_static/OG-IDN_logo.png" class="logo__image only-dark pst-js-only" alt="OG-IDN - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -232,9 +221,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -364,7 +358,7 @@
 
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
   title="Fullscreen mode"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
@@ -378,25 +372,17 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
 </div></div>
@@ -419,7 +405,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-assumptions">Economic Assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-assumptions">Economic Assumptions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-vintage">Calibration vintage</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-economy-parameters">Open Economy Parameters</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#foreign-holding-of-government-debt-in-the-initial-period">Foreign holding of government debt in the initial period</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#foreign-purchases-of-newly-issued-debt">Foreign purchases of newly issued debt</a></li>
@@ -450,17 +439,61 @@ document.write(`
 <span id="chap-macrocalib"></span><h1>Calibration of Macroeconomic Parameters<a class="headerlink" href="#calibration-of-macroeconomic-parameters" title="Link to this heading">#</a></h1>
 <section id="economic-assumptions">
 <h2>Economic Assumptions<a class="headerlink" href="#economic-assumptions" title="Link to this heading">#</a></h2>
-<p>As the default rate of labor augmenting technological change, <span class="math notranslate nohighlight">\(g_y\)</span>, we use a value of 3.8%.  The average annual growth rate in GDP per capita in Indonesia between 2007 and 2023 is 3.8% per year.</p>
+<p>As the default rate of labor augmenting technological change, <span class="math notranslate nohighlight">\(g_y\)</span>, we use a value of 3.71%. This is the average annual growth rate in GDP per capita in Indonesia over the 2000 to 2024 calibration window using the World Bank series employed in the baseline refresh. The 2000 start year is a structural-break boundary: it excludes the 1997-98 Asian Financial Crisis and the post-Suharto Reformasi transition, so the mean reflects Indonesia’s modern macroeconomic regime rather than the one-off crisis contraction. The start year is exposed as the module-level constant <code class="docutils literal notranslate"><span class="pre">GDP_GROWTH_START_YEAR</span></code> in <code class="docutils literal notranslate"><span class="pre">ogidn/macro_params.py</span></code> and is passed directly to the World Bank WDI API as the lower bound of the request window.</p>
+<section id="calibration-vintage">
+<h3>Calibration vintage<a class="headerlink" href="#calibration-vintage" title="Link to this heading">#</a></h3>
+<p>The packaged values in <code class="docutils literal notranslate"><span class="pre">ogidn/ogidn_default_parameters.json</span></code> are a snapshot of a refresh run. Each parameter uses the latest value available from its source at the time of that run:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Source</p></th>
+<th class="head"><p>Vintage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">g_y_annual</span></code></p></td>
+<td><p>World Bank WDI (GDP per capita, constant 2015 US$)</p></td>
+<td><p>2000–2024 mean</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">gamma</span></code></p></td>
+<td><p>ILOSTAT capital share</p></td>
+<td><p>2024</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">initial_debt_ratio</span></code></p></td>
+<td><p>World Bank QPSD</p></td>
+<td><p>2024Q4</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">initial_foreign_debt_ratio</span></code></p></td>
+<td><p>World Bank QPSD</p></td>
+<td><p>2024Q4</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">zeta_D</span></code></p></td>
+<td><p>World Bank QPSD (same as above)</p></td>
+<td><p>2024Q4</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">alpha_T</span></code></p></td>
+<td><p>IMF Government Finance Statistics</p></td>
+<td><p>2023</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">alpha_G</span></code></p></td>
+<td><p>IMF Government Finance Statistics</p></td>
+<td><p>2023</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>To refresh against newer source data, run <code class="docutils literal notranslate"><span class="pre">get_macro_params(update_from_api=True)</span></code> and commit the updated JSON.</p>
+</section>
 </section>
 <section id="open-economy-parameters">
 <h2>Open Economy Parameters<a class="headerlink" href="#open-economy-parameters" title="Link to this heading">#</a></h2>
 <section id="foreign-holding-of-government-debt-in-the-initial-period">
 <h3>Foreign holding of government debt in the initial period<a class="headerlink" href="#foreign-holding-of-government-debt-in-the-initial-period" title="Link to this heading">#</a></h3>
-<p>The path of foreign holding of domestic debt is endogenous, but the initial period stock of debt held by foreign investors is exogenous.  We set this parameter, <code class="docutils literal notranslate"><span class="pre">initial_foreign_debt_ratio</span></code> to 0.76, consistent with data from the Bank of Indonesia’s Debt Statistics of Indonesia report.</p>
+<p>The path of foreign holding of domestic debt is endogenous, but the initial period stock of debt held by foreign investors is exogenous. We set this parameter, <code class="docutils literal notranslate"><span class="pre">initial_foreign_debt_ratio</span></code>, to 0.262 based on the World Bank Quarterly Public Sector Debt (QPSD) series for gross public sector debt held by domestic and external creditors in Indonesia in 2024Q4.</p>
 </section>
 <section id="foreign-purchases-of-newly-issued-debt">
 <h3>Foreign purchases of newly issued debt<a class="headerlink" href="#foreign-purchases-of-newly-issued-debt" title="Link to this heading">#</a></h3>
-<p>We set <span class="math notranslate nohighlight">\(\zeta_D = 0.9\)</span>.  This is the average share of foreign purchases of newly issued government debt found from the World Bank WDI.</p>
+<p>We set <span class="math notranslate nohighlight">\(\zeta_D = 0.262\)</span>. In the current baseline calibration, this is aligned with the same World Bank QPSD-based foreign debt share used for <code class="docutils literal notranslate"><span class="pre">initial_foreign_debt_ratio</span></code>.</p>
 </section>
 <section id="foreign-holdings-of-excess-capital">
 <h3>Foreign holdings of excess capital<a class="headerlink" href="#foreign-holdings-of-excess-capital" title="Link to this heading">#</a></h3>
@@ -471,24 +504,48 @@ document.write(`
 <h2>Government Debt, Spending and Transfers<a class="headerlink" href="#government-debt-spending-and-transfers" title="Link to this heading">#</a></h2>
 <section id="government-debt">
 <h3>Government Debt<a class="headerlink" href="#government-debt" title="Link to this heading">#</a></h3>
-<p>The path of government debt is endogenous.  But the initial value is exogenous.  To avoid converting between model units and dollars, we calibrate the initial debt to GDP ratio, rather than the dollar value of the debt.  This is the model parameter <span class="math notranslate nohighlight">\(\alpha_D\)</span>.  We compute this from the ratio of publicly held debt outstanding to GDP.  Based on 2023 values, this gives us a ratio of 0.398.</p>
+<p>The path of government debt is endogenous. But the initial value is exogenous. To avoid converting between model units and dollars, we calibrate the initial debt to GDP ratio, rather than the dollar value of the debt. This is the model parameter <span class="math notranslate nohighlight">\(\alpha_D\)</span>. We compute this from the World Bank QPSD general government debt-to-GDP series for Indonesia. Using 2024Q4 values gives an initial ratio of 0.390.</p>
 <section id="interest-rates-on-government-debt">
 <h4>Interest rates on government debt<a class="headerlink" href="#interest-rates-on-government-debt" title="Link to this heading">#</a></h4>
-<p>We assume that there is a wedge between the real rate of return on private capital and the real interest rate on government debt.  We model this wedge a scale and level shift.  Specifically, we assume that the real interest rate on government debt, <span class="math notranslate nohighlight">\(r_{gov,t}\)</span>, is related to the real rate of return on private capital, <span class="math notranslate nohighlight">\(r_{t}\)</span>, by the following equation:</p>
+<p>We assume a wedge between the real rate of return on private capital and the real interest rate on government debt, modeled as a scale and level shift.  The real interest rate on government debt, <span class="math notranslate nohighlight">\(r_{gov,t}\)</span>, relates to the real rate of return on private capital, <span class="math notranslate nohighlight">\(r_t\)</span>, by</p>
 <div class="math notranslate nohighlight" id="equation-eqn-r-gov">
-<span class="eqno">(2)<a class="headerlink" href="#equation-eqn-r-gov" title="Link to this equation">#</a></span>\[    r_{gov,t} = (1-\tau_{d,t})r_t + \mu_d\]</div>
-<p>where <span class="math notranslate nohighlight">\(\tau_d\)</span> is the scale parameter and <span class="math notranslate nohighlight">\(\mu_d\)</span> is the level shift parameter.  We set the values of these two parameters to 0.245 and -0.034, respectively.  These are found by using the estimated relationship between corporate and sovereign yields in <span id="id1">[<a class="reference internal" href="../OGIDN_references.html#id73" title="Delong Li, Nicolas E. Magud, and Alejandro Werner. The long-run impact of sovereign yields on corporate yields in emerging markets. Journal of International Money and Finance, 130(C):, 2023. URL: https://ideas.repec.org/a/eee/jimfin/v130y2023ics0261560622001516.html, doi:10.1016/j.jimonfin.2022.1.">Li <em>et al.</em>, 2023</a>]</span> (Table 8, Column 2) and simulating a series of corporate yields given a series of sovereign yields between 2% and 12%.  We then estimate the scale and level shift parameters that best fit these simulated data using ordinary least squares.</p>
+<span class="eqno">(2)<a class="headerlink" href="#equation-eqn-r-gov" title="Link to this equation">#</a></span>\[    r_{gov,t} = (1-\tau_{d,t}) r_t + \mu_d\]</div>
+<p>where <span class="math notranslate nohighlight">\((1-\tau_d)\)</span> is the pass-through coefficient and <span class="math notranslate nohighlight">\(\mu_d\)</span> is the level shift.  For Indonesia we use <span class="math notranslate nohighlight">\(1-\tau_d = 0.24485\)</span> (so <span class="math notranslate nohighlight">\(\tau_d = 0.75515\)</span>) and <span class="math notranslate nohighlight">\(\mu_d = 0.03377\)</span>.</p>
+<p>These values come from <span class="bibtex-citation" id="id1">[<a class="reference internal" href="../OGIDN_references.html#id73" title="Delong Li, Nicolas E. Magud, and Alejandro Werner. The long-run impact of sovereign yields on corporate yields in emerging markets. Journal of International Money and Finance, 130(C):, 2023. URL: https://ideas.repec.org/a/eee/jimfin/v130y2023ics0261560622001516.html, doi:10.1016/j.jimonfin.2022.1.">Li <em>et al.</em>, 2023</a>]</span>, who estimate the long-run pass-through of sovereign yields to corporate yields across 46 emerging economies using corporate yields from IHS Markit and sovereign yields from Bloomberg (predominantly U.S.-dollar secondary-market yields).  They are therefore a cross-country emerging-market relationship rather than Indonesia-specific bond data.  Their preferred specification (Table 8, Column 2) fits a quadratic of the corporate yield on the sovereign yield of the same country:</p>
+<div class="math notranslate nohighlight" id="equation-eqn-lmw-quadratic">
+<span class="eqno">(3)<a class="headerlink" href="#equation-eqn-lmw-quadratic" title="Link to this equation">#</a></span>\[    y_{corp} = 8.199 - 2.975\, y_{sov} + 0.478\, y_{sov}^2\]</div>
+<p>with both yields in percentage points.  The quadratic captures the empirical fact that pass-through rises with the level of sovereign risk, consistent with the credit-risk and liquidity-premium channels the paper identifies.  The paper is freely available as an IMF Working Paper, <a class="reference external" href="https://www.imf.org/en/Publications/WP/Issues/2021/06/04/The-Long-Run-Impact-of-Sovereign-Yields-on-Corporate-Yields-in-Emerging-Markets-50224">Li, Magud, and Werner (2021)</a>, and was later published in the <em>Journal of International Money and Finance</em> <span class="bibtex-citation" id="id2">[<a class="reference internal" href="../OGIDN_references.html#id73" title="Delong Li, Nicolas E. Magud, and Alejandro Werner. The long-run impact of sovereign yields on corporate yields in emerging markets. Journal of International Money and Finance, 130(C):, 2023. URL: https://ideas.repec.org/a/eee/jimfin/v130y2023ics0261560622001516.html, doi:10.1016/j.jimonfin.2022.1.">Li <em>et al.</em>, 2023</a>]</span>.</p>
+<p>OG-Core models the wedge in the opposite direction — it takes <span class="math notranslate nohighlight">\(r_t\)</span> as an input and produces <span class="math notranslate nohighlight">\(r_{gov,t}\)</span> — so we invert the LMW relationship.  We evaluate their quadratic on a grid of sovereign yields from 2% to 12% (approximately the emerging-market range in the LMW sample), compute the implied corporate yields, and then regress sovereign yields linearly on those corporate yields.  Calling the resulting slope <span class="math notranslate nohighlight">\(b\)</span> and intercept <span class="math notranslate nohighlight">\(a\)</span> (both in percentage points), we identify <span class="math notranslate nohighlight">\(1-\tau_d = b\)</span> and <span class="math notranslate nohighlight">\(\mu_d = a/100\)</span>.</p>
+<p>OG-Core’s operational formula is <span class="math notranslate nohighlight">\(r_{gov,t} = \max\!\big(\texttt{r\_gov\_scale}\cdot r_t - \texttt{r\_gov\_shift},\; 0\big)\)</span>, so the JSON stores <code class="docutils literal notranslate"><span class="pre">r_gov_scale</span> <span class="pre">=</span> <span class="pre">1-τ_d</span> <span class="pre">=</span> <span class="pre">0.24485</span></code> and <code class="docutils literal notranslate"><span class="pre">r_gov_shift</span> <span class="pre">=</span> <span class="pre">-μ_d</span> <span class="pre">=</span> <span class="pre">-0.03377</span></code>.  The negative sign on <code class="docutils literal notranslate"><span class="pre">r_gov_shift</span></code> reflects the subtraction in the OG-Core rule, not a negative level shift in the theoretical equation.</p>
+<p>Because the inputs to this inversion are deterministic and contain no Indonesia-specific data, the resulting values do not change across calibration runs.  The packaged values in <code class="docutils literal notranslate"><span class="pre">ogidn/ogidn_default_parameters.json</span></code> and <code class="docutils literal notranslate"><span class="pre">ogidn/ogidn_multisector_default_parameters.json</span></code> are the authoritative source.  The snippet below reproduces them for transparency:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sm</span>
+
+<span class="c1"># LMW (2023) Table 8, Column 2: corp = 8.199 - 2.975 sov + 0.478 sov^2  (pct pts)</span>
+<span class="n">sov_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10</span>
+<span class="n">corp_yhat</span> <span class="o">=</span> <span class="mf">8.199</span> <span class="o">-</span> <span class="p">(</span><span class="mf">2.975</span> <span class="o">*</span> <span class="n">sov_y</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.478</span> <span class="o">*</span> <span class="n">sov_y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Invert: regress sov on corp → linear pass-through</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">corp_yhat</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">sov_y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="n">r_gov_shift</span> <span class="o">=</span> <span class="o">-</span><span class="n">res</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span>  <span class="c1"># -0.03377  (= -μ_d in the theoretical equation)</span>
+<span class="n">r_gov_scale</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>         <span class="c1">#  0.24485  (= 1-τ_d in the theoretical equation)</span>
+</pre></div>
+</div>
+<p>If the LMW estimates are superseded, re-run the inversion above with the new coefficients and update the JSON values.</p>
+<p>For background on how this calibration was first derived, the slope/intercept mapping worked out, and the OG-Core specification refined, see the OG-ZAF discussion in issue <a class="reference external" href="https://github.com/EAPD-DRB/OG-ZAF/issues/22">#22</a> and PRs <a class="reference external" href="https://github.com/EAPD-DRB/OG-ZAF/pull/24">#24</a> (initial implementation) and <a class="reference external" href="https://github.com/EAPD-DRB/OG-ZAF/pull/30">#30</a> (conversion of <code class="docutils literal notranslate"><span class="pre">r_gov</span></code> parameters to lists), together with OG-Core issue <a class="reference external" href="https://github.com/PSLmodels/OG-Core/issues/841">#841</a> and PR <a class="reference external" href="https://github.com/PSLmodels/OG-Core/pull/844">#844</a>.</p>
 </section>
 </section>
 <section id="aggregate-transfers">
 <h3>Aggregate transfers<a class="headerlink" href="#aggregate-transfers" title="Link to this heading">#</a></h3>
-<p>Aggregate (non-Social Security) transfers to households are set as a share of GDP with the parameter <span class="math notranslate nohighlight">\(\alpha_T\)</span>. We exclude Social Security from transfers since it is modeled specifically. With this definition, the share of transfers to GDP in 2015 is 1.3% according to <a class="reference external" href="https://data.imf.org/?sk=b052f0f0-c166-43b6-84fa-47cccae3e219&amp;amp;hide_uv=1">IMF data</a>.</p>
+<p>Aggregate (non-Social Security) transfers to households are set as a share of GDP with the parameter <span class="math notranslate nohighlight">\(\alpha_T\)</span>. We exclude Social Security from transfers since it is modeled specifically. In the current baseline, <code class="docutils literal notranslate"><span class="pre">alpha_T</span> <span class="pre">=</span> <span class="pre">0.00776</span></code>, computed from IMF Government Finance Statistics Statement of Operations data as total social benefits less social security benefits, expressed as a share of GDP. For the default target year of 2024, the latest complete IMF year available is 2023, so the baseline uses that year.</p>
 </section>
 <section id="government-expenditures">
 <h3>Government expenditures<a class="headerlink" href="#government-expenditures" title="Link to this heading">#</a></h3>
 <p>Government spending on goods and services are also set as a share of GDP with the parameter <span class="math notranslate nohighlight">\(\alpha_G\)</span>. We define government spending as:
 <center>Government Spending = Total Outlays - Transfers - Net Interest on Debt - Social Security</center>
-With this definition, the share of government expenditure to GDP is 13.2% based on <a class="reference external" href="https://data.imf.org/?sk=b052f0f0-c166-43b6-84fa-47cccae3e219&amp;amp;hide_uv=1">data from the IMF</a>.</p>
+With this definition, the share of government expenditure to GDP is 11.13% in the current baseline, based on IMF Government Finance Statistics Statement of Operations data. As with <code class="docutils literal notranslate"><span class="pre">alpha_T</span></code>, the default target year is 2024, but the baseline uses the latest complete IMF year available at or before that year, which is currently 2023.</p>
 </section>
 </section>
 </section>
@@ -548,16 +605,21 @@ With this definition, the share of government expenditure to GDP is 13.2% based 
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav class="bd-toc-nav page-toc">
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-assumptions">Economic Assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-assumptions">Economic Assumptions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-vintage">Calibration vintage</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-economy-parameters">Open Economy Parameters</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#foreign-holding-of-government-debt-in-the-initial-period">Foreign holding of government debt in the initial period</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#foreign-purchases-of-newly-issued-debt">Foreign purchases of newly issued debt</a></li>
@@ -621,8 +683,8 @@ By Marcelo LaFleur, Richard W. Evans, and Jason DeBacker
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>
