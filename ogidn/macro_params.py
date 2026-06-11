@@ -270,7 +270,8 @@ def get_macro_params(
 
             if latest_non_nan is not None:
                 print(
-                    f"Warning: No data for {baseline_YYYYQ}. Using last available quarter: {latest_non_nan}"
+                    f"Warning: No data for {baseline_YYYYQ}. "
+                    f"Using last available quarter: {latest_non_nan}"
                 )
                 value = series.get(latest_non_nan, None)
             else:
@@ -306,7 +307,8 @@ def get_macro_params(
                     macro_parameters["g_y_annual"] = g_y_annual
             else:
                 print(
-                    "Warning: Missing GDP per capita data in World Bank data. Skipping update for g_y_annual."
+                    "Warning: Missing GDP per capita data in World Bank "
+                    "data. Skipping update for g_y_annual."
                 )
 
             if "g_y_annual" in macro_parameters:
@@ -351,7 +353,6 @@ def get_macro_params(
                 "Gross PSD USD - external creditors" in wb_data_q.columns
                 and "Gross PSD USD - domestic creditors" in wb_data_q.columns
             ):
-
                 total_debt = (
                     wb_data_q["Gross PSD USD - domestic creditors"]
                     + wb_data_q["Gross PSD USD - external creditors"]
@@ -371,7 +372,8 @@ def get_macro_params(
                     )
             else:
                 print(
-                    "Warning: Missing debt variables in World Bank data. Skipping update for initial_foreign_debt_ratio."
+                    "Warning: Missing debt variables in World Bank data."
+                    " Skipping update for initial_foreign_debt_ratio."
                 )
 
             if "initial_foreign_debt_ratio" in macro_parameters:
@@ -386,7 +388,8 @@ def get_macro_params(
                     macro_parameters["initial_foreign_debt_ratio"]
                 ]
                 print(
-                    f"zeta_D updated from World Bank API: {macro_parameters['zeta_D']}"
+                    "zeta_D updated from World Bank API: "
+                    f"{macro_parameters['zeta_D']}"
                 )
             else:
                 print(
@@ -426,7 +429,11 @@ def get_macro_params(
             )
             # Add headers
             headers = {
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+                "User-Agent": (
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) "
+                    "Chrome/91.0.4472.124 Safari/537.36"
+                )
             }
 
             print("Attempting to update gamma from ILOSTAT")
@@ -453,7 +460,7 @@ def get_macro_params(
             print(
                 f"gamma updated from ILOSTAT API: {macro_parameters['gamma']}"
             )
-        except:
+        except Exception:
             print("Failed to retrieve data from ILOSTAT")
             print("Will not update gamma")
     else:
