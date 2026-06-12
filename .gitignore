@@ -45,3 +45,4 @@ docs/book/_build/*
 *ogidn_example_output.csv
 */OG-IDN-Example/*
 *un_api_token.txt
+uv.lock
