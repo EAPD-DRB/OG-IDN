@@ -1730,7 +1730,7 @@ requires-dist = [
     { name = "ipykernel", marker = "extra == 'dev'" },
     { name = "ipython", marker = "extra == 'dev'" },
     { name = "jupyter", marker = "extra == 'dev'" },
-    { name = "jupyter-book", marker = "extra == 'docs'", specifier = "<2.0.0" },
+    { name = "jupyter-book", marker = "extra == 'docs'", specifier = ">=1.0,<2.0" },
     { name = "linearmodels" },
     { name = "linecheck" },
     { name = "matplotlib" },
