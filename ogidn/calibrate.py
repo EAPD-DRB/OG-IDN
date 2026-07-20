@@ -123,7 +123,7 @@ class Calibration:
                 p.S,
                 p.J,
                 p.lambdas,
-                demog80["omega_SS"].sum(axis=-1),
+                demog80["omega_SS"],
                 plot_path=output_path,
             )
         except Exception as exc:
