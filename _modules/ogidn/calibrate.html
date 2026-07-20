@@ -380,8 +380,6 @@
         <span class="n">demographic_data_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">output_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">update_from_api</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">imf_data_year</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">imf_data_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor for the Calibration class.</span>
@@ -394,8 +392,6 @@
 <span class="sd">            output_path (str): path to save output to</span>
 <span class="sd">            update_from_api (bool): Set True if you want to pull updated</span>
 <span class="sd">                macro data from World Bank and UN APIs</span>
-<span class="sd">            imf_data_year (int | None): IMF target year override</span>
-<span class="sd">            imf_data_path (str | None): path to save IMF source data CSV</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            None</span>
@@ -423,8 +419,6 @@
                 <span class="n">macro_data_start_year</span><span class="p">,</span>
                 <span class="n">macro_data_end_year</span><span class="p">,</span>
                 <span class="n">update_from_api</span><span class="o">=</span><span class="n">update_from_api</span><span class="p">,</span>
-                <span class="n">imf_data_year</span><span class="o">=</span><span class="n">imf_data_year</span><span class="p">,</span>
-                <span class="n">imf_data_path</span><span class="o">=</span><span class="n">imf_data_path</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Macro params update failed: </span><span class="si">{</span><span class="n">exc</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>

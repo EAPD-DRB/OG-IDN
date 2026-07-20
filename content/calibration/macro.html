@@ -406,24 +406,27 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-assumptions">Economic Assumptions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-vintage">Calibration vintage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-vintage-and-refresh-policy">Calibration vintage and refresh policy</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-economy-parameters">Open Economy Parameters</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#foreign-holding-of-government-debt-in-the-initial-period">Foreign holding of government debt in the initial period</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#foreign-purchases-of-newly-issued-debt">Foreign purchases of newly issued debt</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#foreign-holdings-of-excess-capital">Foreign holdings of excess capital</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#world-interest-rate">World interest rate</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#government-debt-spending-and-transfers">Government Debt, Spending and Transfers</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#government-debt">Government Debt</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interest-rates-on-government-debt">Interest rates on government debt</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#debt-elastic-sovereign-premium">Debt-elastic sovereign premium</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregate-transfers">Aggregate transfers</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#government-expenditures">Government expenditures</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#steady-state-validation">Steady-state validation</a></li>
 </ul>
             </nav>
         </div>
@@ -439,50 +442,73 @@
 <span id="chap-macrocalib"></span><h1>Calibration of Macroeconomic Parameters<a class="headerlink" href="#calibration-of-macroeconomic-parameters" title="Link to this heading">#</a></h1>
 <section id="economic-assumptions">
 <h2>Economic Assumptions<a class="headerlink" href="#economic-assumptions" title="Link to this heading">#</a></h2>
-<p>As the default rate of labor augmenting technological change, <span class="math notranslate nohighlight">\(g_y\)</span>, we use a value of 3.71%. This is the average annual growth rate in GDP per capita in Indonesia over the 2000 to 2024 calibration window using the World Bank series employed in the baseline refresh. The 2000 start year is a structural-break boundary: it excludes the 1997-98 Asian Financial Crisis and the post-Suharto Reformasi transition, so the mean reflects Indonesia’s modern macroeconomic regime rather than the one-off crisis contraction. The start year is exposed as the module-level constant <code class="docutils literal notranslate"><span class="pre">GDP_GROWTH_START_YEAR</span></code> in <code class="docutils literal notranslate"><span class="pre">ogidn/macro_params.py</span></code> and is passed directly to the World Bank WDI API as the lower bound of the request window.</p>
-<section id="calibration-vintage">
-<h3>Calibration vintage<a class="headerlink" href="#calibration-vintage" title="Link to this heading">#</a></h3>
-<p>The packaged values in <code class="docutils literal notranslate"><span class="pre">ogidn/ogidn_default_parameters.json</span></code> are a snapshot of a refresh run. Each parameter uses the latest value available from its source at the time of that run:</p>
+<p>As the default rate of labor augmenting technological change, <span class="math notranslate nohighlight">\(g_y\)</span>, we use the average annual growth rate in GDP per capita in Indonesia over the <strong>2000–2019</strong> window (World Bank series <code class="docutils literal notranslate"><span class="pre">NY.GDP.PCAP.KD</span></code>, GDP per capita in constant 2015 US$). The 2000 start year is a structural-break boundary: it excludes the 1997-98 Asian Financial Crisis and the post-Suharto Reformasi transition, so the mean reflects Indonesia’s modern macroeconomic regime rather than the one-off crisis contraction. The 2019 end year is pre-pandemic: it keeps the 2020 COVID contraction and its mechanical rebound out of a <em>long-run</em> productivity target. The window bounds are the module-level constants <code class="docutils literal notranslate"><span class="pre">GDP_GROWTH_START_YEAR</span></code> and <code class="docutils literal notranslate"><span class="pre">GDP_GROWTH_END_YEAR</span></code> in <code class="docutils literal notranslate"><span class="pre">ogidn/macro_params.py</span></code>. Over this window the packaged value is <code class="docutils literal notranslate"><span class="pre">g_y_annual</span></code> ≈ 0.040 (about 4.0% per year), up from the 3.71% implied by the earlier 2000–2024 window that folded in the COVID crash.</p>
+<section id="calibration-vintage-and-refresh-policy">
+<h3>Calibration vintage and refresh policy<a class="headerlink" href="#calibration-vintage-and-refresh-policy" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">g_y_annual</span></code> is the <strong>only</strong> macro parameter refreshed from a live API when the calibration is run with <code class="docutils literal notranslate"><span class="pre">update_from_api=True</span></code>; every other macro parameter is a documented, point-in-time Indonesian value held directly in <code class="docutils literal notranslate"><span class="pre">ogidn/ogidn_default_parameters.json</span></code>. Previously the connected run also pulled the debt ratios (World Bank QPSD), <code class="docutils literal notranslate"><span class="pre">gamma</span></code> (ILOSTAT), and <code class="docutils literal notranslate"><span class="pre">alpha_T</span></code>/<code class="docutils literal notranslate"><span class="pre">alpha_G</span></code> (IMF GFS) on every call, overwriting the documented baseline with whatever those series happened to return — so the offline default and the connected run drifted apart. Freezing them keeps a live update from clobbering a value we source deliberately, and lets the offline default reproduce the connected run (see <a class="reference external" href="https://github.com/EAPD-DRB/OG-IDN/blob/main/ogidn/update_baseline.py"><code class="docutils literal notranslate"><span class="pre">ogidn/update_baseline.py</span></code></a>). Demographics and the earnings profile <code class="docutils literal notranslate"><span class="pre">e</span></code> remain live (UN data) and are baked in by <code class="docutils literal notranslate"><span class="pre">update_baseline</span></code>.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Packaged value</p></th>
 <th class="head"><p>Source</p></th>
-<th class="head"><p>Vintage</p></th>
+<th class="head"><p>Live-refreshed?</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">g_y_annual</span></code></p></td>
-<td><p>World Bank WDI (GDP per capita, constant 2015 US$)</p></td>
-<td><p>2000–2024 mean</p></td>
+<td><p>≈ 0.040</p></td>
+<td><p>World Bank WDI (GDP per capita, constant 2015 US$), 2000–2019 mean</p></td>
+<td><p><strong>Yes</strong></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">gamma</span></code></p></td>
-<td><p>ILOSTAT capital share</p></td>
-<td><p>2024</p></td>
+<td><p>0.41859</p></td>
+<td><p>ILOSTAT capital share of income</p></td>
+<td><p>No (frozen)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">initial_debt_ratio</span></code></p></td>
-<td><p>World Bank QPSD</p></td>
-<td><p>2024Q4</p></td>
+<td><p>0.402</p></td>
+<td><p>IMF WEO general-government gross debt, 2024</p></td>
+<td><p>No (frozen)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">initial_foreign_debt_ratio</span></code></p></td>
-<td><p>World Bank QPSD</p></td>
-<td><p>2024Q4</p></td>
+<td><p>0.262</p></td>
+<td><p>World Bank QPSD external creditors, 2024Q4</p></td>
+<td><p>No (frozen)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">zeta_D</span></code></p></td>
-<td><p>World Bank QPSD (same as above)</p></td>
-<td><p>2024Q4</p></td>
+<td><p>0.262</p></td>
+<td><p>= <code class="docutils literal notranslate"><span class="pre">initial_foreign_debt_ratio</span></code></p></td>
+<td><p>No (frozen)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">alpha_T</span></code></p></td>
-<td><p>IMF Government Finance Statistics</p></td>
-<td><p>2023</p></td>
+<td><p>0.00776</p></td>
+<td><p>IMF Government Finance Statistics, 2023</p></td>
+<td><p>No (frozen)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">alpha_G</span></code></p></td>
-<td><p>IMF Government Finance Statistics</p></td>
-<td><p>2023</p></td>
+<td><p>0.14</p></td>
+<td><p>IMF WEO general-government expenditure basis, 2023–24</p></td>
+<td><p>No (frozen)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">zeta_K</span></code></p></td>
+<td><p>0.42</p></td>
+<td><p>Normalized Chinn-Ito index (2023), validated against the BI IIP</p></td>
+<td><p>No (frozen)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">world_int_rate_annual</span></code></p></td>
+<td><p>0.05</p></td>
+<td><p>Global risk-free rate + Indonesian sovereign premium</p></td>
+<td><p>No (frozen)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">debt_ratio_ss</span></code></p></td>
+<td><p>0.40</p></td>
+<td><p>IMF Article IV medium-term debt anchor</p></td>
+<td><p>No (frozen)</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>To refresh against newer source data, run <code class="docutils literal notranslate"><span class="pre">get_macro_params(update_from_api=True)</span></code> and commit the updated JSON.</p>
+<p>To refresh <code class="docutils literal notranslate"><span class="pre">g_y_annual</span></code> (and the demographic overlay) against newer source data, run <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">python</span> <span class="pre">-m</span> <span class="pre">ogidn.update_baseline</span></code> and commit the updated JSON.</p>
 </section>
 </section>
 <section id="open-economy-parameters">
@@ -497,14 +523,20 @@
 </section>
 <section id="foreign-holdings-of-excess-capital">
 <h3>Foreign holdings of excess capital<a class="headerlink" href="#foreign-holdings-of-excess-capital" title="Link to this heading">#</a></h3>
-<p>We set <span class="math notranslate nohighlight">\(\zeta_K = 0.9\)</span>. Note, this parameter is harder to pin down from the data as foreign purchases on “excess” capital demand is not typically directly measured or reported.  A value of 0.9 implies a high degree of openness to international capital flows.</p>
+<p>We set <span class="math notranslate nohighlight">\(\zeta_K = 0.42\)</span>. This parameter governs the share of the gap between domestically-supplied capital and the capital demanded at the world interest rate that foreign investors fill, so it is effectively the degree of openness of the capital account. It is harder to pin down from the data than the debt parameters, because purchases of “excess” capital demand are not directly measured. We anchor the value to the normalized Chinn-Ito capital-account openness index for Indonesia, which sits at <strong>0.418</strong> in the latest (2023) vintage and has been flat at that level since 2011, after Bank Indonesia introduced capital-flow-management measures around 2010–11 (<a class="reference external" href="https://web.pdx.edu/~ito/Chinn-Ito_website.htm">Chinn-Ito index</a>). Indonesia is therefore a <em>partially</em> open economy, not the near-fully-open one the earlier placeholder of 0.9 implied.</p>
+<p>The decisive discipline on the value is empirical: it is chosen so the model’s steady-state foreign-owned share of the capital stock lands near Indonesia’s actual position. Bank Indonesia’s International Investment Position and UNCTAD’s inward FDI stock put foreign-owned capital at roughly <strong>20% of the stock</strong> (FDI stock ≈ US<span class="math notranslate nohighlight">\(286bn against GDP ≈ US\)</span>1.37tn in 2023), far below the ~44% the placeholder of 0.9 produced in the single-industry steady state. At <span class="math notranslate nohighlight">\(\zeta_K = 0.42\)</span> — together with the lower steady-state debt anchor and the higher world rate below, which both free up domestic capital — the model’s foreign-owned capital share falls back into that empirical range. Note that <span class="math notranslate nohighlight">\(\zeta_K\)</span> is a marginal-flow parameter (the fill share of <em>excess</em> demand) rather than a literal legal-openness index; the Chinn-Ito value is the anchor and the IIP share is the target the calibration is validated against.</p>
+</section>
+<section id="world-interest-rate">
+<h3>World interest rate<a class="headerlink" href="#world-interest-rate" title="Link to this heading">#</a></h3>
+<p>The small-open-economy block prices foreign capital and foreign debt at an exogenous world interest rate, <code class="docutils literal notranslate"><span class="pre">world_int_rate_annual</span></code>. We set it to <strong>5%</strong> — a global risk-free rate of about 4% plus an Indonesian country-risk premium of roughly 100 basis points. Indonesia is an investment-grade sovereign (Moody’s Baa2, S&amp;P and Fitch BBB), and its EMBI/CDS spreads over U.S. Treasuries have run near 80–150 bps in 2024–25, so ~100 bps is a representative premium. The previous 4% placeholder omitted this premium, understating the supply price of foreign capital and so overstating foreign ownership of the capital stock.</p>
 </section>
 </section>
 <section id="government-debt-spending-and-transfers">
 <h2>Government Debt, Spending and Transfers<a class="headerlink" href="#government-debt-spending-and-transfers" title="Link to this heading">#</a></h2>
 <section id="government-debt">
 <h3>Government Debt<a class="headerlink" href="#government-debt" title="Link to this heading">#</a></h3>
-<p>The path of government debt is endogenous. But the initial value is exogenous. To avoid converting between model units and dollars, we calibrate the initial debt to GDP ratio, rather than the dollar value of the debt. This is the model parameter <span class="math notranslate nohighlight">\(\alpha_D\)</span>. We compute this from the World Bank QPSD general government debt-to-GDP series for Indonesia. Using 2024Q4 values gives an initial ratio of 0.390.</p>
+<p>The path of government debt is endogenous. But the initial value is exogenous. To avoid converting between model units and dollars, we calibrate the initial debt to GDP ratio, rather than the dollar value of the debt. This is the model parameter <span class="math notranslate nohighlight">\(\alpha_D\)</span>. We set <code class="docutils literal notranslate"><span class="pre">initial_debt_ratio</span></code> to <strong>0.402</strong>, the IMF World Economic Outlook general-government gross-debt-to-GDP figure for Indonesia in 2024 (the Kemenkeu/DJPPR central-government series runs about 1 pp lower and rounds to the same ~40%).</p>
+<p>We also set the long-run (steady-state) debt-to-GDP target, <code class="docutils literal notranslate"><span class="pre">debt_ratio_ss</span></code>, to <strong>0.40</strong>, replacing the 0.50 placeholder. This anchors to the IMF 2025 Article IV consultation, which projects “stable public debt of just above 40 percent of GDP over the medium term,” and to Indonesia’s realized stance — central-government debt has sat in a 38–40% band (39.9% as of mid-2025, Kemenkeu). We deliberately do <strong>not</strong> use the 60% ceiling from Law No. 17/2003 on State Finances: that is a never-breach statutory limit (alongside the 3%-of-GDP deficit cap), not a target the authorities steer toward, and no official projection approaches it. Setting the steady-state target at 0.40 — essentially the current stance — keeps the fiscal closure consistent with Indonesia’s debt position at both ends of the transition, and frees household saving that a US-style placeholder would have absorbed into government debt, easing the crowding-out that had inflated the foreign-owned capital share.</p>
 <section id="interest-rates-on-government-debt">
 <h4>Interest rates on government debt<a class="headerlink" href="#interest-rates-on-government-debt" title="Link to this heading">#</a></h4>
 <p>We assume a wedge between the real rate of return on private capital and the real interest rate on government debt, modeled as a scale and level shift.  The real interest rate on government debt, <span class="math notranslate nohighlight">\(r_{gov,t}\)</span>, relates to the real rate of return on private capital, <span class="math notranslate nohighlight">\(r_t\)</span>, by</p>
@@ -516,7 +548,10 @@
 <span class="eqno">(3)<a class="headerlink" href="#equation-eqn-lmw-quadratic" title="Link to this equation">#</a></span>\[    y_{corp} = 8.199 - 2.975\, y_{sov} + 0.478\, y_{sov}^2\]</div>
 <p>with both yields in percentage points.  The quadratic captures the empirical fact that pass-through rises with the level of sovereign risk, consistent with the credit-risk and liquidity-premium channels the paper identifies.  The paper is freely available as an IMF Working Paper, <a class="reference external" href="https://www.imf.org/en/Publications/WP/Issues/2021/06/04/The-Long-Run-Impact-of-Sovereign-Yields-on-Corporate-Yields-in-Emerging-Markets-50224">Li, Magud, and Werner (2021)</a>, and was later published in the <em>Journal of International Money and Finance</em> <span class="bibtex-citation" id="id2">[<a class="reference internal" href="../OGIDN_references.html#id73" title="Delong Li, Nicolas E. Magud, and Alejandro Werner. The long-run impact of sovereign yields on corporate yields in emerging markets. Journal of International Money and Finance, 130(C):, 2023. URL: https://ideas.repec.org/a/eee/jimfin/v130y2023ics0261560622001516.html, doi:10.1016/j.jimonfin.2022.1.">Li <em>et al.</em>, 2023</a>]</span>.</p>
 <p>OG-Core models the wedge in the opposite direction — it takes <span class="math notranslate nohighlight">\(r_t\)</span> as an input and produces <span class="math notranslate nohighlight">\(r_{gov,t}\)</span> — so we invert the LMW relationship.  We evaluate their quadratic on a grid of sovereign yields from 2% to 12% (approximately the emerging-market range in the LMW sample), compute the implied corporate yields, and then regress sovereign yields linearly on those corporate yields.  Calling the resulting slope <span class="math notranslate nohighlight">\(b\)</span> and intercept <span class="math notranslate nohighlight">\(a\)</span> (both in percentage points), we identify <span class="math notranslate nohighlight">\(1-\tau_d = b\)</span> and <span class="math notranslate nohighlight">\(\mu_d = a/100\)</span>.</p>
-<p>OG-Core’s operational formula is <span class="math notranslate nohighlight">\(r_{gov,t} = \max\!\big(\texttt{r\_gov\_scale}\cdot r_t - \texttt{r\_gov\_shift},\; 0\big)\)</span>, so the JSON stores <code class="docutils literal notranslate"><span class="pre">r_gov_scale</span> <span class="pre">=</span> <span class="pre">1-τ_d</span> <span class="pre">=</span> <span class="pre">0.24485</span></code> and <code class="docutils literal notranslate"><span class="pre">r_gov_shift</span> <span class="pre">=</span> <span class="pre">-μ_d</span> <span class="pre">=</span> <span class="pre">-0.03377</span></code>.  The negative sign on <code class="docutils literal notranslate"><span class="pre">r_gov_shift</span></code> reflects the subtraction in the OG-Core rule, not a negative level shift in the theoretical equation.</p>
+<p>OG-Core’s operational formula also carries a debt-elastic term (see the debt-elastic premium below):</p>
+<div class="math notranslate nohighlight" id="equation-eqn-r-gov-op">
+<span class="eqno">(4)<a class="headerlink" href="#equation-eqn-r-gov-op" title="Link to this equation">#</a></span>\[    r_{gov,t} = \max\!\big(\texttt{r\_gov\_scale}\cdot r_t - \texttt{r\_gov\_shift} + \texttt{r\_gov\_DY}\cdot\tfrac{D_t}{Y_t} + \texttt{r\_gov\_DY2}\cdot\big(\tfrac{D_t}{Y_t}\big)^2,\; 0\big)\]</div>
+<p>The level wedge stores <code class="docutils literal notranslate"><span class="pre">r_gov_scale</span> <span class="pre">=</span> <span class="pre">1-τ_d</span> <span class="pre">=</span> <span class="pre">0.24485</span></code> and a base <code class="docutils literal notranslate"><span class="pre">r_gov_shift</span> <span class="pre">=</span> <span class="pre">-μ_d</span> <span class="pre">=</span> <span class="pre">-0.03377</span></code> (the negative sign reflects the subtraction in the OG-Core rule, not a negative level shift in the theoretical equation). Enabling the debt-elastic premium recenters the stored <code class="docutils literal notranslate"><span class="pre">r_gov_shift</span></code> to <strong>-0.04017</strong> (see below).</p>
 <p>Because the inputs to this inversion are deterministic and contain no Indonesia-specific data, the resulting values do not change across calibration runs.  The packaged values in <code class="docutils literal notranslate"><span class="pre">ogidn/ogidn_default_parameters.json</span></code> and <code class="docutils literal notranslate"><span class="pre">ogidn/ogidn_multisector_default_parameters.json</span></code> are the authoritative source.  The snippet below reproduces them for transparency:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sm</span>
@@ -536,6 +571,11 @@
 <p>If the LMW estimates are superseded, re-run the inversion above with the new coefficients and update the JSON values.</p>
 <p>For background on how this calibration was first derived, the slope/intercept mapping worked out, and the OG-Core specification refined, see the OG-ZAF discussion in issue <a class="reference external" href="https://github.com/EAPD-DRB/OG-ZAF/issues/22">#22</a> and PRs <a class="reference external" href="https://github.com/EAPD-DRB/OG-ZAF/pull/24">#24</a> (initial implementation) and <a class="reference external" href="https://github.com/EAPD-DRB/OG-ZAF/pull/30">#30</a> (conversion of <code class="docutils literal notranslate"><span class="pre">r_gov</span></code> parameters to lists), together with OG-Core issue <a class="reference external" href="https://github.com/PSLmodels/OG-Core/issues/841">#841</a> and PR <a class="reference external" href="https://github.com/PSLmodels/OG-Core/pull/844">#844</a>.</p>
 </section>
+<section id="debt-elastic-sovereign-premium">
+<h4>Debt-elastic sovereign premium<a class="headerlink" href="#debt-elastic-sovereign-premium" title="Link to this heading">#</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">r_gov_DY</span></code> and <code class="docutils literal notranslate"><span class="pre">r_gov_DY2</span></code> terms let the sovereign rate rise with the debt ratio — the crowding-out-via-risk channel that OG-Core and the sister country models leave off by default (otherwise a debt-financed reform raises debt with no feedback to borrowing cost). It is the <a class="reference external" href="https://www.nber.org/system/files/working_papers/w9270/w9270.pdf">Schmitt-Grohé and Uribe (2003)</a> debt-elastic premium in convex (quadratic) form, in the spirit of the fiscal-limits literature (Bi 2012; Ghosh et al. 2013). OG-IDN uses a <em>centered</em> form, <span class="math notranslate nohighlight">\(\texttt{r\_gov\_DY2}\,(D_t/Y_t - 0.40)^2\)</span> — flat at the 0.40 steady-state debt target and steepening only as debt rises away from it — matching Indonesia’s stable spreads around its current ~40% debt level and stress only well above it.</p>
+<p>We set <span class="math notranslate nohighlight">\(\texttt{r\_gov\_DY2} = 0.04\)</span>. Expanding the centered quadratic <span class="math notranslate nohighlight">\(0.04\,(D/Y - 0.40)^2\)</span> into OG-Core’s <span class="math notranslate nohighlight">\(\texttt{r\_gov\_DY}\cdot(D/Y) + \texttt{r\_gov\_DY2}\cdot(D/Y)^2\)</span> form gives <span class="math notranslate nohighlight">\(\texttt{r\_gov\_DY} = -2\cdot0.04\cdot0.40 = -0.032\)</span>, and folds the constant <span class="math notranslate nohighlight">\(0.04\cdot0.40^2 = 0.0064\)</span> into the level shift, recentering <code class="docutils literal notranslate"><span class="pre">r_gov_shift</span></code> from <span class="math notranslate nohighlight">\(-0.03377\)</span> to <span class="math notranslate nohighlight">\(-0.03377 - 0.0064 = -0.04017\)</span>. By construction the premium is zero at the 0.40 target, so it holds the steady state fixed; away from the target it adds about <strong>36 bp at <span class="math notranslate nohighlight">\(D/Y = 0.70\)</span></strong> and <strong>144 bp at <span class="math notranslate nohighlight">\(D/Y = 1.0\)</span></strong>, within the emerging-market spread-to-debt range. Centering is what makes the premium usable along the transition: a premium that bit at the target (vertex at zero debt) would compound any debt overshoot into a runaway debt-service feedback. It is enabled by default; a more conservative <span class="math notranslate nohighlight">\(\texttt{r\_gov\_DY2} = 0.02\)</span> is a reasonable alternative.</p>
+</section>
 </section>
 <section id="aggregate-transfers">
 <h3>Aggregate transfers<a class="headerlink" href="#aggregate-transfers" title="Link to this heading">#</a></h3>
@@ -543,10 +583,71 @@
 </section>
 <section id="government-expenditures">
 <h3>Government expenditures<a class="headerlink" href="#government-expenditures" title="Link to this heading">#</a></h3>
-<p>Government spending on goods and services are also set as a share of GDP with the parameter <span class="math notranslate nohighlight">\(\alpha_G\)</span>. We define government spending as:
-<center>Government Spending = Total Outlays - Transfers - Net Interest on Debt - Social Security</center>
-With this definition, the share of government expenditure to GDP is 11.13% in the current baseline, based on IMF Government Finance Statistics Statement of Operations data. As with <code class="docutils literal notranslate"><span class="pre">alpha_T</span></code>, the default target year is 2024, but the baseline uses the latest complete IMF year available at or before that year, which is currently 2023.</p>
+<p>Government spending on goods and services is set as a share of GDP with the parameter <span class="math notranslate nohighlight">\(\alpha_G\)</span>. Conceptually it is government spending net of transfers, net interest, and social security:
+<center>Government Spending = Total Outlays - Transfers - Net Interest on Debt - Social Security</center></p>
+<p>We set <code class="docutils literal notranslate"><span class="pre">alpha_G</span> <span class="pre">=</span> <span class="pre">0.14</span></code>. The value is built on the <strong>IMF World Economic Outlook general-government basis</strong> — the same basis used for revenue and for the debt anchors — so that the government’s books are internally consistent. Indonesia’s general-government expenditure is about 16.7% of GDP (WEO, 2023–24); netting out interest (~2%) and the transfers captured by <span class="math notranslate nohighlight">\(\alpha_T\)</span> (0.78%) leaves roughly 14% for goods and services.</p>
+<p>An earlier value of 11.13% came from a narrower IMF Government Finance Statistics expense series (total expense ≈ 14.0% of GDP), which understates general-government spending relative to the WEO revenue and debt figures the rest of the calibration uses. That inconsistency produced a spurious primary surplus: with revenue near 15% and spending near 12%, the government ran a 2–4%-of-GDP surplus every period, and because the budget-closure rule does not engage until <span class="math notranslate nohighlight">\(t_{G1}\)</span> (period 20), the baseline debt-to-GDP ratio drifted all the way from 0.40 down through zero to about −0.23 before the closure pulled it back — a government that is implausibly a net creditor mid-transition. Putting <span class="math notranslate nohighlight">\(\alpha_G\)</span> on the WEO basis matches Indonesia’s actual fiscal stance (a small primary surplus — 2023 was Indonesia’s first in over a decade — and an overall deficit near 2% of GDP), so the baseline debt path now stays near Indonesia’s ~40% level (it eases to about 0.31 by <span class="math notranslate nohighlight">\(t_{G1}\)</span> and returns to the 0.40 steady state) instead of going negative. Because steady-state <span class="math notranslate nohighlight">\(G\)</span> is set by the closure rule rather than by <span class="math notranslate nohighlight">\(\alpha_G\)</span>, this change leaves the steady state unchanged; it only corrects the transition.</p>
 </section>
+</section>
+<section id="steady-state-validation">
+<h2>Steady-state validation<a class="headerlink" href="#steady-state-validation" title="Link to this heading">#</a></h2>
+<p>Most of the parameters above are only weakly identified from the data on their own, so the real test of the calibration is whether the <em>steady state they jointly produce</em> resembles the Indonesian economy. The table below compares the packaged baseline steady state (single-industry, offline solve) against recent Indonesian data. The recalibration of the open-economy block and the debt anchor moves every ratio toward its empirical counterpart; the “prior baseline” column is the steady state under the earlier placeholders (<span class="math notranslate nohighlight">\(\zeta_K = 0.9\)</span>, <code class="docutils literal notranslate"><span class="pre">world_int_rate_annual</span></code> <span class="math notranslate nohighlight">\(= 0.04\)</span>, <code class="docutils literal notranslate"><span class="pre">debt_ratio_ss</span></code> <span class="math notranslate nohighlight">\(= 0.50\)</span>).</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Steady-state ratio</p></th>
+<th class="head"><p>Prior baseline</p></th>
+<th class="head"><p><strong>Recalibrated</strong></p></th>
+<th class="head"><p>Indonesia (data)</p></th>
+<th class="head"><p>Source</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Foreign-owned capital, <span class="math notranslate nohighlight">\(K_f/K\)</span></p></td>
+<td><p>0.44</p></td>
+<td><p><strong>0.17</strong></p></td>
+<td><p>~0.20</p></td>
+<td><p>BI IIP / UNCTAD FDI stock (US$286bn) over GDP, 2023</p></td>
+</tr>
+<tr class="row-odd"><td><p>Real return on capital, <span class="math notranslate nohighlight">\(r\)</span></p></td>
+<td><p>0.043</p></td>
+<td><p><strong>0.063</strong></p></td>
+<td><p>0.05–0.08</p></td>
+<td><p>World Bank real interest rate; real MPK</p></td>
+</tr>
+<tr class="row-even"><td><p>Capital-output ratio, <span class="math notranslate nohighlight">\(K/Y\)</span></p></td>
+<td><p>4.44</p></td>
+<td><p><strong>3.64</strong></p></td>
+<td><p>~3.0–3.5</p></td>
+<td><p>flow-consistent <span class="math notranslate nohighlight">\((I/Y)/(g+\delta)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Private consumption, <span class="math notranslate nohighlight">\(C/Y\)</span></p></td>
+<td><p>0.49</p></td>
+<td><p><strong>0.53</strong></p></td>
+<td><p>0.53–0.58</p></td>
+<td><p>World Bank <code class="docutils literal notranslate"><span class="pre">NE.CON.PRVT.ZS</span></code>, 2023–24</p></td>
+</tr>
+<tr class="row-even"><td><p>Investment, <span class="math notranslate nohighlight">\(I/Y\)</span></p></td>
+<td><p>0.38</p></td>
+<td><p><strong>0.33</strong></p></td>
+<td><p>0.29–0.32</p></td>
+<td><p>World Bank <code class="docutils literal notranslate"><span class="pre">NE.GDI.FTOT.ZS</span></code>, 2023–24</p></td>
+</tr>
+<tr class="row-odd"><td><p>Government debt, <span class="math notranslate nohighlight">\(D/Y\)</span></p></td>
+<td><p>0.50</p></td>
+<td><p><strong>0.40</strong></p></td>
+<td><p>~0.40</p></td>
+<td><p>IMF WEO general-government gross debt, 2024</p></td>
+</tr>
+<tr class="row-even"><td><p>Tax revenue, <span class="math notranslate nohighlight">\(REV/Y\)</span></p></td>
+<td><p>0.14</p></td>
+<td><p><strong>0.15</strong></p></td>
+<td><p>0.145–0.15</p></td>
+<td><p>IMF general-government revenue, 2023–24</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The largest correction is the foreign-owned capital share, which falls from an implausible 44% to about 17%, in line with the ~20% implied by Bank Indonesia’s International Investment Position. The domestic real return rises from 4.3% — pinned near the old 4% world rate — to a more realistic 6.3%, the capital-output ratio falls into the flow-consistent range, and consumption and investment shares move into their observed bands. The negative-domestic-capital (<span class="math notranslate nohighlight">\(K_d &lt; 0\)</span>) condition that bound under the placeholder calibration no longer occurs. The packaged steady state solves offline in under a minute, and the full example (baseline plus a corporate-income-tax-cut reform, steady states and transition paths) runs end to end with transition-path residuals well inside tolerance.</p>
 </section>
 </section>
 
@@ -617,24 +718,27 @@ With this definition, the share of government expenditure to GDP is 11.13% in th
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-assumptions">Economic Assumptions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-vintage">Calibration vintage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-vintage-and-refresh-policy">Calibration vintage and refresh policy</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-economy-parameters">Open Economy Parameters</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#foreign-holding-of-government-debt-in-the-initial-period">Foreign holding of government debt in the initial period</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#foreign-purchases-of-newly-issued-debt">Foreign purchases of newly issued debt</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#foreign-holdings-of-excess-capital">Foreign holdings of excess capital</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#world-interest-rate">World interest rate</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#government-debt-spending-and-transfers">Government Debt, Spending and Transfers</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#government-debt">Government Debt</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interest-rates-on-government-debt">Interest rates on government debt</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#debt-elastic-sovereign-premium">Debt-elastic sovereign premium</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregate-transfers">Aggregate transfers</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#government-expenditures">Government expenditures</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#steady-state-validation">Steady-state validation</a></li>
 </ul>
   </nav></div>
 

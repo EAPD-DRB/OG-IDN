@@ -67,7 +67,7 @@ kernelspec:
 | $\gamma$                         | Capital share of income                                                 | [0.419...0.419]                                       |
 | $\varepsilon$                    | Elasticity of substitution between capital and labor                    | [1.000...1.000]                                       |
 | $\delta$                         | Capital depreciation rate                                               | 0.050                                                 |
-| $g_{y}$                          | Growth rate of labor augmenting technological progress                  | 0.0371                                                |
+| $g_{y}$                          | Growth rate of labor augmenting technological progress                  | 0.0400                                                |
 | $\texttt{tax_func_type}$       | Functional form used for income tax functions                           | DEP                                                   |
 | $\texttt{analytical_mtrs}$      | Whether use analytical MTRs or estimate MTRs                            | 0.00E+00                                              |
 | $\texttt{age_specific}$         | Whether use age-specific tax functions                                  | 1.000                                                 |
@@ -84,15 +84,15 @@ kernelspec:
 | $\alpha^{T}_{t}$                 | Transfers as a share of GDP                                             | [0.008...0.008]                                       |
 | $\eta_{j,s,t}$                   | Distribution of transfers                                               | Too large to report here, see default parameters JSON |
 | $\eta_{RM,j,s,t}$                | Distribution of remittances                                             | Too large to report here, see default parameters JSON |
-| $\alpha^{G}_{t}$                 | Government spending as a share of GDP                                   | [0.111...0.111]                                       |
+| $\alpha^{G}_{t}$                 | Government spending as a share of GDP                                   | [0.140...0.140]                                       |
 | $\alpha_{RM,1}$                  | Remittances as a share of GDP in initial period                         | 0.00E+00                                              |
 | $\alpha_{RM,T}$                  | Remittances as a share of GDP in long run                               | 0.00E+00                                              |
 | $g_{RM,t}$                       | Growth rate of remittances in initial periods                           | [0.000...0.000]                                       |
 | $t_{G1}$                         | Model period in which budget closure rule starts                        | 20                                                    |
 | $t_{G2}$                         | Model period in which budget closure rule ends                          | 256                                                   |
 | $\rho_{G}$                       | Budget closure rule smoothing parameter                                 | 0.100                                                 |
-| $\bar{\alpha}_{D}$               | Steady-state Debt-to-GDP ratio                                          | 2.000                                                 |
-| $\alpha_{D,0}$                   | Initial period Debt-to-GDP ratio                                        | 0.390                                                 |
+| $\bar{\alpha}_{D}$               | Steady-state Debt-to-GDP ratio                                          | 0.400                                                 |
+| $\alpha_{D,0}$                   | Initial period Debt-to-GDP ratio                                        | 0.402                                                 |
 | $\tau_{d,t}$                     | Scale parameter in government interest rate wedge                       | [1.000...1.000]                                       |
 | $\mu_{d,t}$                      | Shift parameter in government interest rate wedge                       | [0.020...0.020]                                       |
 | $\texttt{avg_earn_num_years}$ | Number of years over which compute average earnings for pension benefit | 35                                                    |
@@ -104,10 +104,10 @@ kernelspec:
 | $\texttt{PIA_maxpayment}$       | Maximum PIA payment                                                     | 3501.000                                              |
 | $\texttt{PIA_minpayment}$       | Minimum PIA payment                                                     | 0.00E+00                                              |
 | $\theta_{adj,t}$                 | Adjustment to replacement rate                                          | [1.000...1.000]                                       |
-| $r^{*}_{t}$                      | World interest rate                                                     | [0.040...0.040]                                       |
+| $r^{*}_{t}$                      | World interest rate                                                     | [0.050...0.050]                                       |
 | $D_{f,0}$                        | Share of government debt held by foreigners in initial period           | 0.262                                                 |
 | $\zeta_{D, t}$                   | Share of new debt issues purchased by foreigners                        | [0.262...0.262]                                       |
-| $\zeta_{K, t}$                   | Share of excess capital demand satisfied by foreigners                  | [0.100...0.100]                                       |
+| $\zeta_{K, t}$                   | Share of excess capital demand satisfied by foreigners                  | [0.420...0.420]                                       |
 | $\xi$                            | Dampening parameter for TPI                                             | 0.400                                                 |
 | $\texttt{maxiter}$               | Maximum number of iterations for TPI                                    | 250                                                   |
 | $\texttt{mindist_SS}$           | SS solution tolerance                                                   | 1.00E-09                                              |
