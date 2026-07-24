@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [Unreleased]
+
+### Fixed
+
+- Brought all installation instructions in line with the uv workflow the project migrated to in 0.1.0, matching the same fix in OG-PHL and OG-ZAF. The README now documents two supported paths, each as per-platform copy-paste blocks verified end to end: the OG family's universal installer (`install.sh --repo og-idn`, from PSLmodels/OG-Core) and a manual install (install uv, clone, `uv run python examples/run_og_idn.py`). The PyPI install section is dropped: `pip install ogidn` on a Python older than 3.12, including the one that ships with macOS, silently installs an outdated release with an old OG-Core, and even on a supported Python the PyPI route does not pin the tested `ogcore` version. The contributor guide and the UN tutorial no longer instruct readers to build the deleted `ogidn-dev` conda environment (those steps failed outright: `environment.yml` was removed in 0.1.0); both now use `uv sync --extra dev` and `uv run`, the contributor guide's test command matches CI (`pytest -m "not local"`), and stale `master`-branch references now say `main`.
+
 ## [0.2.0] - 2026-07-03 12:00:00
 
 ### Changed
