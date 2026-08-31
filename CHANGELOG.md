@@ -6,11 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [Unreleased]
+## [0.3.0] - 2026-08-31 09:00:00
 
-### Fixed
+### Changed
 
-- Brought all installation instructions in line with the uv workflow the project migrated to in 0.1.0, matching the same fix in OG-PHL and OG-ZAF. The README now documents two supported paths, each as per-platform copy-paste blocks verified end to end: the OG family's universal installer (`install.sh --repo og-idn`, from PSLmodels/OG-Core) and a manual install (install uv, clone, `uv run python examples/run_og_idn.py`). The PyPI install section is dropped: `pip install ogidn` on a Python older than 3.12, including the one that ships with macOS, silently installs an outdated release with an old OG-Core, and even on a supported Python the PyPI route does not pin the tested `ogcore` version. The contributor guide and the UN tutorial no longer instruct readers to build the deleted `ogidn-dev` conda environment (those steps failed outright: `environment.yml` was removed in 0.1.0); both now use `uv sync --extra dev` and `uv run`, the contributor guide's test command matches CI (`pytest -m "not local"`), and stale `master`-branch references now say `main`.
+- Require `ogcore>=0.18.0` and migrate the calibration to its income-group-varying demographics (PSLmodels/OG-Core#1165): the packaged demographic arrays (`omega`, `omega_SS`, `rho`, `imm_rates` and their preTP seeds) are regenerated in the new age-by-income shape with the new `update_baseline_demographics` tool (macro parameters untouched, enforced by the tool's clobber guard), and both `get_pop_objs` call sites pass `income_percentiles=p.lambdas.flatten()` as 0.18 requires (from PR #62 by @jdebacker). OG-IDN's demographics do not vary by income group, so the new arrays are the old ones spread across groups by `lambdas`: the age distribution and the regenerated earnings matrix reproduce the previous values to machine precision, and model results are unchanged. `income.get_e_interp` now reads the OG-USA snapshot's raw JSON values instead of loading them through a `Specifications` object, which decouples it from the installed ogcore's array schema (the 0.18 schema rejects OG-USA's not-yet-migrated shapes) and accepts age weights in either the 1-D or the new age-by-income shape. The multisector JSON's demographic arrays (an older data vintage than the single-industry file) are expanded to the new shape mechanically — distributions scaled by `lambdas`, rates replicated across groups — so their values are bit-for-bit preserved rather than re-downloaded.
+- The single-industry baseline now defaults the TPI outer loop to ogcore 0.18's Anderson acceleration (`TPI_outer_method = "anderson"`) and lowers the damping parameter `nu` from 0.4 to 0.2 (the anchor step for Anderson's trust region). Solver settings only: the steady state solves to the same numbers.
+
+### Added
+
+- `ogidn/update_baseline_demographics.py` (ported from OG-PHL): regenerates ONLY the demographic keys and the derived earnings profile `e` in the packaged single-industry JSON, bootstraps across ogcore demographic-schema changes by loading the base JSON without the demographic keys, and refuses to write if any non-demographic key would change.
 
 ## [0.2.0] - 2026-07-03 12:00:00
 
@@ -90,6 +95,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - This version is a pre-release alpha. The example run script OG-IDN/examples/run_og_idn.py runs, but the model is not currently calibrated to represent the Indonesian economy and population.
 
+[0.3.0]: https://github.com/EAPD-DRB/OG-IDN/compare/v0.2.0...v0.3.0
+[0.2.0]: https://github.com/EAPD-DRB/OG-IDN/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/EAPD-DRB/OG-IDN/compare/v0.0.8...v0.1.0
 [0.0.8]: https://github.com/EAPD-DRB/OG-IDN/compare/v0.0.7...v0.0.8
 [0.0.7]: https://github.com/EAPD-DRB/OG-IDN/compare/v0.0.6...v0.0.7
