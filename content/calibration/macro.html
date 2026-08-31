@@ -564,8 +564,10 @@
 <span class="n">X</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">corp_yhat</span><span class="p">)</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">sov_y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 
-<span class="n">r_gov_shift</span> <span class="o">=</span> <span class="o">-</span><span class="n">res</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span>  <span class="c1"># -0.03377  (= -μ_d in the theoretical equation)</span>
-<span class="n">r_gov_scale</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>         <span class="c1">#  0.24485  (= 1-τ_d in the theoretical equation)</span>
+<span class="n">r_gov_shift</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="o">-</span><span class="n">res</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span>
+<span class="p">)</span>  <span class="c1"># -0.03377  (= -μ_d in the theoretical equation)</span>
+<span class="n">r_gov_scale</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1">#  0.24485  (= 1-τ_d in the theoretical equation)</span>
 </pre></div>
 </div>
 <p>If the LMW estimates are superseded, re-run the inversion above with the new coefficients and update the JSON values.</p>
