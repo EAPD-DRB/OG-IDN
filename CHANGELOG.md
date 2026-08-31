@@ -6,12 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [Unreleased]
+## [0.3.0] - 2026-08-31 09:00:00
 
 ### Changed
 
 - Require `ogcore>=0.18.0` and migrate the calibration to its income-group-varying demographics (PSLmodels/OG-Core#1165): the packaged demographic arrays (`omega`, `omega_SS`, `rho`, `imm_rates` and their preTP seeds) are regenerated in the new age-by-income shape with the new `update_baseline_demographics` tool (macro parameters untouched, enforced by the tool's clobber guard), and both `get_pop_objs` call sites pass `income_percentiles=p.lambdas.flatten()` as 0.18 requires (from PR #62 by @jdebacker). OG-IDN's demographics do not vary by income group, so the new arrays are the old ones spread across groups by `lambdas`: the age distribution and the regenerated earnings matrix reproduce the previous values to machine precision, and model results are unchanged. `income.get_e_interp` now reads the OG-USA snapshot's raw JSON values instead of loading them through a `Specifications` object, which decouples it from the installed ogcore's array schema (the 0.18 schema rejects OG-USA's not-yet-migrated shapes) and accepts age weights in either the 1-D or the new age-by-income shape. The multisector JSON's demographic arrays (an older data vintage than the single-industry file) are expanded to the new shape mechanically — distributions scaled by `lambdas`, rates replicated across groups — so their values are bit-for-bit preserved rather than re-downloaded.
-
 - The single-industry baseline now defaults the TPI outer loop to ogcore 0.18's Anderson acceleration (`TPI_outer_method = "anderson"`) and lowers the damping parameter `nu` from 0.4 to 0.2 (the anchor step for Anderson's trust region). Solver settings only: the steady state solves to the same numbers.
 
 ### Added
@@ -96,6 +95,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - This version is a pre-release alpha. The example run script OG-IDN/examples/run_og_idn.py runs, but the model is not currently calibrated to represent the Indonesian economy and population.
 
+[0.3.0]: https://github.com/EAPD-DRB/OG-IDN/compare/v0.2.0...v0.3.0
+[0.2.0]: https://github.com/EAPD-DRB/OG-IDN/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/EAPD-DRB/OG-IDN/compare/v0.0.8...v0.1.0
 [0.0.8]: https://github.com/EAPD-DRB/OG-IDN/compare/v0.0.7...v0.0.8
 [0.0.7]: https://github.com/EAPD-DRB/OG-IDN/compare/v0.0.6...v0.0.7
